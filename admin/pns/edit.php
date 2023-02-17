@@ -285,7 +285,7 @@ $row = $data->fetch_array();
             $size_file = $_FILES['file']['size'];
             $tmp_file  = $_FILES['file']['tmp_name'];
             $dir_file  = '../../file/';
-            $allow_ext        = array('png', 'jpg', 'jpeg', 'zip', 'rar');
+            $allow_ext        = array('png', 'jpg', 'jpeg', 'zip', 'rar', 'pdf');
             $allow_size       = 1024 * 1024 * 1;
             // var_dump($nama_file); die();
 
