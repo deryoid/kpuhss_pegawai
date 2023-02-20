@@ -141,6 +141,12 @@ include '../../templates/head.php';
                                                 <textarea type="text" class="form-control" name="ket" required=""></textarea>
                                             </div>
                                         </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Sertifikat Pelatihan/Pendukung *Pdf</label>
+                                            <div class="col-sm-10">
+                                                <input type="file" class="form-control" name="filepelatihan">
+                                            </div>
+                                        </div>
                                     </div>
                                     <!-- /.card-body -->
 
@@ -301,6 +307,62 @@ include '../../templates/head.php';
     </script>";
             }
         }
+        if (!empty($_FILES['filepelatihan']['name'])) {
+
+            // UPLOAD file PEMOHON
+            $filepelatihan      = $_FILES['filepelatihan']['name'];
+            $x_filepelatihan    = explode('.', $filepelatihan);
+            $ext_filepelatihan  = end($x_filepelatihan);
+            $nama_filepelatihan = rand(1, 99999) . '.' . $ext_filepelatihan;
+            $size_filepelatihan = $_FILES['filepelatihan']['size'];
+            $tmp_filepelatihan  = $_FILES['filepelatihan']['tmp_name'];
+            $dir_filepelatihan  = '../../file/';
+            $allow_ext        = array('pdf');
+            $allow_size       = 2048 * 2048 * 3;
+            // var_dump($nama_file); die();
+
+            if (in_array($ext_filepelatihan, $allow_ext) === true) {
+                if ($size_filepelatihan <= $allow_size) {
+                    move_uploaded_file($tmp_filepelatihan, $dir_filepelatihan . $nama_filepelatihan);
+                    // if (file_exists($dir_file . $filelama)) {
+                    //     unlink($dir_file . $filelama);
+                    // }
+                    // $e .= "Upload Success"; 
+                } else {
+                    echo "
+        <script type='text/javascript'>
+        setTimeout(function () {    
+            swal({
+                title: '',
+                text:  'Ukuran File Terlalu Besar, Maksimal 3 Mb',
+                type: 'warning',
+                timer: 3000,
+                showConfirmButton: true
+            });     
+        },10);  
+        window.setTimeout(function(){ 
+            window.history.back();
+        } ,2000);   
+        </script>";
+                }
+            } else {
+                echo "
+    <script type='text/javascript'>
+    setTimeout(function () {    
+        swal({
+            title: 'Format File Tidak Didukung',
+            text:  'Format File Harus Berupa PDF',
+            type: 'warning',
+            timer: 3000,
+            showConfirmButton: true
+        });     
+    },10);  
+    window.setTimeout(function(){ 
+        window.history.back();
+    } ,2000);   
+    </script>";
+            }
+        }
 
         $submit = $koneksi->query("INSERT INTO nominatif_ppnpn VALUES (
         NULL,
@@ -313,7 +375,8 @@ include '../../templates/head.php';
         '$sub_bagian',
         '$ket',
         '$nama_fileppendidikan',
-        '$nama_filesubbagian'
+        '$nama_filesubbagian',
+        '$nama_filepelatihan'
         )");
         // var_dump($submit, $koneksi->error);
         // die();

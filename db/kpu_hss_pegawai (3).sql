@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Waktu pembuatan: 20 Feb 2023 pada 03.18
+-- Waktu pembuatan: 20 Feb 2023 pada 06.40
 -- Versi server: 5.7.34
 -- Versi PHP: 7.4.21
 
@@ -90,20 +90,21 @@ CREATE TABLE `nominatif_ppnpn` (
   `sub_bagian` varchar(50) NOT NULL,
   `ket` text NOT NULL,
   `filependidikan` varchar(255) NOT NULL,
-  `filesubbagian` varchar(255) NOT NULL
+  `filesubbagian` varchar(255) NOT NULL,
+  `filepelatihan` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data untuk tabel `nominatif_ppnpn`
 --
 
-INSERT INTO `nominatif_ppnpn` (`id_ppnpn`, `nama_ppnpn`, `tempat_lahir`, `tanggal_lahir`, `jk`, `agama`, `pendidikan`, `sub_bagian`, `ket`, `filependidikan`, `filesubbagian`) VALUES
-(5, 'SALDOZ YEDI', 'Kandangan', '1980-08-11', 'Laki-laki', 'Islam', 'SMA', 'Keungan,Umum dan Logistik', 'Petugas Keamanan (Satpam)', '', ''),
-(6, 'MASTONI RIDANI', 'Taniran', '1991-06-01', 'Laki-laki', 'Islam', 'SMA', 'Keungan,Umum dan Logistik', 'Petugas Keamanan (Satpam)', '', ''),
-(7, 'SUARIADI', 'Negara', '1998-03-02', 'Laki-laki', 'Islam', 'SMP', 'Keungan,Umum dan Logistik', 'Penjaga malam', '', ''),
-(8, 'ABDURRAHMAN', 'PADANG BATUNG', '1988-10-12', 'Laki-laki', 'Islam', 'SMA', 'HUKUM DAN SDM', 'SOPIR', '', ''),
-(9, 'EMALIANI', 'TANIRAN KUBAH', '1989-06-22', 'Perempuan', 'Islam', 'SMA', 'Keungan,Umum dan Logistik', 'PRAMUBAKTI', '', ''),
-(10, 'APRIADI RAKHMAN,S.Kom', 'Kandangan', '1989-04-22', 'Laki-laki', 'Islam', 'S1', 'PERENCANAAN,DATA,DAN INFORMASI', 'ADMINISTRASI', '', '');
+INSERT INTO `nominatif_ppnpn` (`id_ppnpn`, `nama_ppnpn`, `tempat_lahir`, `tanggal_lahir`, `jk`, `agama`, `pendidikan`, `sub_bagian`, `ket`, `filependidikan`, `filesubbagian`, `filepelatihan`) VALUES
+(5, 'SALDOZ YEDI', 'Kandangan', '1980-08-11', 'Laki-laki', 'Islam', 'SMA', 'Keungan,Umum dan Logistik', 'Petugas Keamanan (Satpam)', '', '', ''),
+(6, 'MASTONI RIDANI', 'Taniran', '1991-06-01', 'Laki-laki', 'Islam', 'SMA', 'Keungan,Umum dan Logistik', 'Petugas Keamanan (Satpam)', '', '', ''),
+(7, 'SUARIADI', 'Negara', '1998-03-02', 'Laki-laki', 'Islam', 'SMP', 'Keungan,Umum dan Logistik', 'Penjaga malam', '', '', ''),
+(8, 'ABDURRAHMAN', 'PADANG BATUNG', '1988-10-12', 'Laki-laki', 'Islam', 'SMA', 'HUKUM DAN SDM', 'SOPIR', '', '', ''),
+(9, 'EMALIANI', 'TANIRAN KUBAH', '1989-06-22', 'Perempuan', 'Islam', 'SMA', 'Keungan,Umum dan Logistik', 'PRAMUBAKTI', '', '', ''),
+(10, 'APRIADI RAKHMAN,S.Kom', 'Kandangan', '1989-04-22', 'Laki-laki', 'Islam', 'S1', 'PERENCANAAN,DATA,DAN INFORMASI', 'ADMINISTRASI', '', '', '');
 
 -- --------------------------------------------------------
 

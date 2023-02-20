@@ -129,7 +129,7 @@ $row = $data->fetch_array();
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Sub. Bagian</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" name="sub_bagian" value="<?= $row['tgl_kegiatan_teknis'] ?>">
+                                                <input type="text" class="form-control" name="sub_bagian" value="<?= $row['sub_bagian'] ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -141,10 +141,15 @@ $row = $data->fetch_array();
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Keterangan</label>
                                             <div class="col-sm-10">
-                                                <textarea type="text" class="form-control" name="ket"><?= $row['keterangan'] ?></textarea>
+                                                <textarea type="text" class="form-control" name="ket"><?= $row['ket'] ?></textarea>
                                             </div>
                                         </div>
-
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Sertifikat Pelatihan/Pendukung *Pdf</label>
+                                            <div class="col-sm-10">
+                                                <input type="file" class="form-control" name="filepelatihan" value="<?= $row['filepelatihan'] ?>">
+                                            </div>
+                                        </div>
                                     </div>
                                     <!-- /.card-body -->
 
@@ -251,7 +256,7 @@ $row = $data->fetch_array();
             $nama_filependidikan = $row['filependidikan'];
             $e .= "Upload Success!";
         }
-        if (!empty($_FILES['filediklat']['name'])) {
+        if (!empty($_FILES['filesubbagian']['name'])) {
             $filesubbagianlama = $row['filesubbagian'];
             // UPLOAD file PEMOHON
             $filesubbagian      = $_FILES['filesubbagian']['name'];
@@ -310,6 +315,65 @@ $row = $data->fetch_array();
             $nama_filesubbagian = $row['filesubbagian'];
             $e .= "Upload Success!";
         }
+        if (!empty($_FILES['filepelatihan']['name'])) {
+            $filepelatihanlama = $row['filepelatihan'];
+            // UPLOAD file PEMOHON
+            $filepelatihan      = $_FILES['filepelatihan']['name'];
+            $x_filepelatihan    = explode('.', $filepelatihan);
+            $ext_filepelatihan  = end($x_filepelatihan);
+            $nama_filepelatihan = rand(1, 99999) . '.' . $ext_filepelatihan;
+            $size_filepelatihan = $_FILES['filepelatihan']['size'];
+            $tmp_filepelatihan  = $_FILES['filepelatihan']['tmp_name'];
+            $dir_filepelatihan  = '../../file/';
+            $allow_ext        = array('pdf');
+            $allow_size       = 2048 * 2048 * 3;
+            // var_dump($nama_file); die();
+
+            if (in_array($ext_filepelatihan, $allow_ext) === true) {
+                if ($size_filepelatihan <= $allow_size) {
+                    move_uploaded_file($tmp_filepelatihan, $dir_filepelatihan . $nama_filepelatihan);
+                    if (file_exists($dir_filepelatihan . $filepelatihanlama)) {
+                        unlink($dir_filepelatihan . $filepelatihanlama);
+                    }
+                    $e .= "Upload Success";
+                } else {
+                    echo "
+        <script type='text/javascript'>
+        setTimeout(function () {    
+            swal({
+                title: '',
+                text:  'Ukuran File Terlalu Besar, Maksimal 3 Mb',
+                type: 'warning',
+                timer: 3000,
+                showConfirmButton: true
+            });     
+        },10);  
+        window.setTimeout(function(){ 
+            window.history.back();
+        } ,2000);   
+        </script>";
+                }
+            } else {
+                echo "
+    <script type='text/javascript'>
+    setTimeout(function () {    
+        swal({
+            title: 'Format File Tidak Didukung',
+            text:  'Format File Harus Berupa PDF',
+            type: 'warning',
+            timer: 3000,
+            showConfirmButton: true
+        });     
+    },10);  
+    window.setTimeout(function(){ 
+        window.history.back();
+    } ,2000);   
+    </script>";
+            }
+        } else {
+            $nama_filepelatihan = $row['filepelatihan'];
+            $e .= "Upload Success!";
+        }
 
 
         if (!empty($e)) {
@@ -324,7 +388,8 @@ $row = $data->fetch_array();
         sub_bagian = '$sub_bagian',
         ket = '$ket',
         filependidikan = '$nama_filependidikan',
-        filesubbagian = '$nama_filesubbagian'
+        filesubbagian = '$nama_filesubbagian',
+        filepelatihan = '$nama_filepelatihan'
         WHERE 
         id_ppnpn = '$id'
         ");

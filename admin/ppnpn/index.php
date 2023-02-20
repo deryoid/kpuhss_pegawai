@@ -82,6 +82,7 @@ include '../../templates/head.php';
                                                     <th>Sub Bagian</th>
                                                     <th>SK Penugasan/Sub Bagian *Pdf</th>
                                                     <th>Keterangan</th>
+                                                    <th>Sertifikat Pelatihan/Pendukung *Pdf</th>
                                                 </tr>
                                             </thead>
                                             <tbody style="background-color: white">
@@ -106,6 +107,7 @@ include '../../templates/head.php';
                                                         <td><?= $row['sub_bagian'] ?></td>
                                                         <td><a target="_blank" href="<?= base_url(); ?>/file/<?= $row['filesubbagian'] ?>" class="btn btn-xs bg-dark" title="View"><i class="fa fa-eye"></i> View</i></a></td>
                                                         <td><?= $row['ket'] ?></td>
+                                                        <td><a target="_blank" href="<?= base_url(); ?>/file/<?= $row['filepelatihan'] ?>" class="btn btn-xs bg-dark" title="View"><i class="fa fa-eye"></i> View</i></a></td>
                                                     </tr>
                                                 <?php } ?>
                                             </tbody>
