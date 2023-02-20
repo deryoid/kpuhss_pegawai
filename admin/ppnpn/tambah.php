@@ -117,7 +117,12 @@ include '../../templates/head.php';
                                                 </select>
                                             </div>
                                         </div>
-
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Ijazah Pendidikan Terakhir *Pdf</label>
+                                            <div class="col-sm-10">
+                                                <input type="file" class="form-control" name="filependidikan">
+                                            </div>
+                                        </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Sub Bagian</label>
                                             <div class="col-sm-10">
@@ -125,15 +130,15 @@ include '../../templates/head.php';
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Keterangan</label>
+                                            <label class="col-sm-2 col-form-label">SK Penugasan/Sub Bagian *Pdf</label>
                                             <div class="col-sm-10">
-                                                <textarea type="text" class="form-control" name="ket" required=""></textarea>
+                                                <input type="file" class="form-control" name="filesubbagian">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Berkas Pendukung Berupa Zip/Rar/Pdf (Ijazah, SK, Dll)</label>
+                                            <label class="col-sm-2 col-form-label">Keterangan</label>
                                             <div class="col-sm-10">
-                                                <input type="file" class="form-control" name="file">
+                                                <textarea type="text" class="form-control" name="ket" required=""></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -184,26 +189,23 @@ include '../../templates/head.php';
         $pendidikan = $_POST['pendidikan'];
         $sub_bagian = $_POST['sub_bagian'];
         $ket = $_POST['ket'];
-
-
-        // CEK APAKAH file DIGANTI
-        if (!empty($_FILES['file']['name'])) {
+        if (!empty($_FILES['filependidikan']['name'])) {
 
             // UPLOAD file PEMOHON
-            $file      = $_FILES['file']['name'];
-            $x_file    = explode('.', $file);
-            $ext_file  = end($x_file);
-            $nama_file = rand(1, 99999) . '.' . $ext_file;
-            $size_file = $_FILES['file']['size'];
-            $tmp_file  = $_FILES['file']['tmp_name'];
-            $dir_file  = '../../file/';
-            $allow_ext        = array('png', 'jpg', 'jpeg', 'zip', 'rar', 'pdf');
-            $allow_size       = 2048 * 2048 * 1;
+            $filependidikan      = $_FILES['filependidikan']['name'];
+            $x_filependidikan    = explode('.', $filependidikan);
+            $ext_filependidikan  = end($x_filependidikan);
+            $nama_filependidikan = rand(1, 99999) . '.' . $ext_filependidikan;
+            $size_filependidikan = $_FILES['filependidikan']['size'];
+            $tmp_filependidikan  = $_FILES['filependidikan']['tmp_name'];
+            $dir_filependidikan  = '../../file/';
+            $allow_ext        = array('pdf');
+            $allow_size       = 2048 * 2048 * 3;
             // var_dump($nama_file); die();
 
-            if (in_array($ext_file, $allow_ext) === true) {
-                if ($size_file <= $allow_size) {
-                    move_uploaded_file($tmp_file, $dir_file . $nama_file);
+            if (in_array($ext_filependidikan, $allow_ext) === true) {
+                if ($size_filependidikan <= $allow_size) {
+                    move_uploaded_file($tmp_filependidikan, $dir_filependidikan . $nama_filependidikan);
                     // if (file_exists($dir_file . $filelama)) {
                     //     unlink($dir_file . $filelama);
                     // }
@@ -214,7 +216,7 @@ include '../../templates/head.php';
         setTimeout(function () {    
             swal({
                 title: '',
-                text:  'Ukuran File Terlalu Besar, Maksimal 1 Mb',
+                text:  'Ukuran File Terlalu Besar, Maksimal 3 Mb',
                 type: 'warning',
                 timer: 3000,
                 showConfirmButton: true
@@ -231,7 +233,63 @@ include '../../templates/head.php';
     setTimeout(function () {    
         swal({
             title: 'Format File Tidak Didukung',
-            text:  'Format File Harus Berupa PNG,JPG,RAR, ZIP',
+            text:  'Format File Harus Berupa PDF',
+            type: 'warning',
+            timer: 3000,
+            showConfirmButton: true
+        });     
+    },10);  
+    window.setTimeout(function(){ 
+        window.history.back();
+    } ,2000);   
+    </script>";
+            }
+        }
+        if (!empty($_FILES['filesubbagian']['name'])) {
+
+            // UPLOAD file PEMOHON
+            $filesubbagian      = $_FILES['filesubbagian']['name'];
+            $x_filesubbagian    = explode('.', $filesubbagian);
+            $ext_filesubbagian  = end($x_filesubbagian);
+            $nama_filesubbagian = rand(1, 99999) . '.' . $ext_filesubbagian;
+            $size_filesubbagian = $_FILES['filesubbagian']['size'];
+            $tmp_filesubbagian  = $_FILES['filesubbagian']['tmp_name'];
+            $dir_filesubbagian  = '../../file/';
+            $allow_ext        = array('pdf');
+            $allow_size       = 2048 * 2048 * 3;
+            // var_dump($nama_file); die();
+
+            if (in_array($ext_filesubbagian, $allow_ext) === true) {
+                if ($size_filesubbagian <= $allow_size) {
+                    move_uploaded_file($tmp_filesubbagian, $dir_filesubbagian . $nama_filesubbagian);
+                    // if (file_exists($dir_file . $filelama)) {
+                    //     unlink($dir_file . $filelama);
+                    // }
+                    // $e .= "Upload Success"; 
+                } else {
+                    echo "
+        <script type='text/javascript'>
+        setTimeout(function () {    
+            swal({
+                title: '',
+                text:  'Ukuran File Terlalu Besar, Maksimal 3 Mb',
+                type: 'warning',
+                timer: 3000,
+                showConfirmButton: true
+            });     
+        },10);  
+        window.setTimeout(function(){ 
+            window.history.back();
+        } ,2000);   
+        </script>";
+                }
+            } else {
+                echo "
+    <script type='text/javascript'>
+    setTimeout(function () {    
+        swal({
+            title: 'Format File Tidak Didukung',
+            text:  'Format File Harus Berupa PDF',
             type: 'warning',
             timer: 3000,
             showConfirmButton: true
@@ -254,7 +312,8 @@ include '../../templates/head.php';
         '$pendidikan',
         '$sub_bagian',
         '$ket',
-        '$nama_file'
+        '$nama_fileppendidikan',
+        '$nama_filesubbagian'
         )");
         // var_dump($submit, $koneksi->error);
         // die();

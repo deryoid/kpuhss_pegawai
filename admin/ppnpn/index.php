@@ -72,21 +72,22 @@ include '../../templates/head.php';
                                                 <tr align="center">
                                                     <th></th>
                                                     <th>No</th>
-                                                    <th>Berkas Pendukung Berupa Zip/Rar/Pdf (Ijazah, SK, Dll)</th>
                                                     <th>Nama</th>
                                                     <th>Tempat Lahir</th>
                                                     <th>Tanggal Lahir</th>
                                                     <th>JK</th>
                                                     <th>Agama</th>
                                                     <th>Pendidikan Umum</th>
+                                                    <th>Ijazah Pendidikan Terakhir *Pdf</th>
                                                     <th>Sub Bagian</th>
+                                                    <th>SK Penugasan/Sub Bagian *Pdf</th>
                                                     <th>Keterangan</th>
                                                 </tr>
                                             </thead>
                                             <tbody style="background-color: white">
                                                 <?php
                                                 $no = 1;
-                                                $data = $koneksi->query("SELECT * FROM nominatif_ppnpn ORDER BY id_ppnpn ASC");
+                                                $data = $koneksi->query("SELECT * FROM nominatif_ppnpn ORDER BY id_ppnpn DESC");
                                                 while ($row = $data->fetch_array()) {
                                                 ?>
                                                     <tr>
@@ -95,14 +96,15 @@ include '../../templates/head.php';
                                                             <a href="hapus?id=<?= $row['id_ppnpn'] ?>" class="btn btn-danger btn-sm alert-hapus" title="Hapus"><i class="fa fa-trash"></i> Hapus</a>
                                                         </td>
                                                         <td align="center"><?= $no++ ?></td>
-                                                        <td><a href="<?= base_url(); ?>/file/<?= $row['file'] ?>" class="btn btn-sm" title="Download"><i class="fa fa-download"></i> Download</i></a></td>
                                                         <td><?= $row['nama_ppnpn'] ?></td>
                                                         <td><?= $row['tempat_lahir'] ?></td>
                                                         <td><?= $row['tanggal_lahir'] ?></td>
                                                         <td><?= $row['jk'] ?></td>
                                                         <td><?= $row['agama'] ?></td>
                                                         <td><?= $row['pendidikan'] ?></td>
+                                                        <td><a target="_blank" href="<?= base_url(); ?>/file/<?= $row['filependidikan'] ?>" class="btn btn-xs bg-dark" title="View"><i class="fa fa-eye"></i> View</i></a></td>
                                                         <td><?= $row['sub_bagian'] ?></td>
+                                                        <td><a target="_blank" href="<?= base_url(); ?>/file/<?= $row['filesubbagian'] ?>" class="btn btn-xs bg-dark" title="View"><i class="fa fa-eye"></i> View</i></a></td>
                                                         <td><?= $row['ket'] ?></td>
                                                     </tr>
                                                 <?php } ?>

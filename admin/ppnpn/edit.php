@@ -120,11 +120,22 @@ $row = $data->fetch_array();
                                                 </select>
                                             </div>
                                         </div>
-
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Ijazah Pendidikan Terakhir *Pdf</label>
+                                            <div class="col-sm-10">
+                                                <input type="file" class="form-control" name="filependidikan" value="<?= $row['filependidikan'] ?>">
+                                            </div>
+                                        </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Sub. Bagian</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" name="sub_bagian" value="<?= $row['tgl_kegiatan_teknis'] ?>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">SK Penugasan/Sub Bagian *Pdf</label>
+                                            <div class="col-sm-10">
+                                                <input type="file" class="form-control" name="filesubbagian" value="<?= $row['filesubbagian'] ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -134,12 +145,6 @@ $row = $data->fetch_array();
                                             </div>
                                         </div>
 
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Berkas Pendukung Berupa Zip/Rar/Pdf (Ijazah, SK, Dll)</label>
-                                            <div class="col-sm-10">
-                                                <input type="file" class="form-control" name="file">
-                                            </div>
-                                        </div>
                                     </div>
                                     <!-- /.card-body -->
 
@@ -187,68 +192,122 @@ $row = $data->fetch_array();
         $pendidikan = $_POST['pendidikan'];
         $sub_bagian = $_POST['sub_bagian'];
         $ket = $_POST['ket'];
-
-        //upload foto mhs
-        $e = "";
-        // CEK APAKAH FOTO DIGANTI
-        if (!empty($_FILES['file']['name'])) {
-            $filelama = $row['file'];
-
+        if (!empty($_FILES['filependidikan']['name'])) {
+            $filependidikanlama = $row['filependidikan'];
             // UPLOAD file PEMOHON
-            $file      = $_FILES['file']['name'];
-            $x_file    = explode('.', $file);
-            $ext_file  = end($x_file);
-            $nama_file = rand(1, 99999) . '.' . $ext_file;
-            $size_file = $_FILES['file']['size'];
-            $tmp_file  = $_FILES['file']['tmp_name'];
-            $dir_file  = '../../file/';
-            $allow_ext        = array('png', 'jpg', 'jpeg', 'zip', 'rar');
-            $allow_size       = 1024 * 1024 * 1;
+            $filependidikan      = $_FILES['filependidikan']['name'];
+            $x_filependidikan    = explode('.', $filependidikan);
+            $ext_filependidikan  = end($x_filependidikan);
+            $nama_filependidikan = rand(1, 99999) . '.' . $ext_filependidikan;
+            $size_filependidikan = $_FILES['filependidikan']['size'];
+            $tmp_filependidikan  = $_FILES['filependidikan']['tmp_name'];
+            $dir_filependidikan  = '../../file/';
+            $allow_ext        = array('pdf');
+            $allow_size       = 2048 * 2048 * 3;
             // var_dump($nama_file); die();
 
-            if (in_array($ext_file, $allow_ext) === true) {
-                if ($size_file <= $allow_size) {
-                    move_uploaded_file($tmp_file, $dir_file . $nama_file);
-                    if (file_exists($dir_file . $filelama)) {
-                        unlink($dir_file . $filelama);
+            if (in_array($ext_filependidikan, $allow_ext) === true) {
+                if ($size_filependidikan <= $allow_size) {
+                    move_uploaded_file($tmp_filependidikan, $dir_filependidikan . $nama_filependidikan);
+                    if (file_exists($dir_filependidikan . $filependidikanlama)) {
+                        unlink($dir_filependidikan . $filependidikanlama);
                     }
                     $e .= "Upload Success";
                 } else {
                     echo "
-                <script type='text/javascript'>
-                setTimeout(function () {    
-                    swal({
-                        title: '',
-                        text:  'Ukuran  Terlalu Besar, Maksimal 1 Mb',
-                        type: 'warning',
-                        timer: 3000,
-                        showConfirmButton: true
-                    });     
-                },10);  
-                window.setTimeout(function(){ 
-                    window.history.back();
-                } ,2000);   
-                </script>";
+        <script type='text/javascript'>
+        setTimeout(function () {    
+            swal({
+                title: '',
+                text:  'Ukuran File Terlalu Besar, Maksimal 3 Mb',
+                type: 'warning',
+                timer: 3000,
+                showConfirmButton: true
+            });     
+        },10);  
+        window.setTimeout(function(){ 
+            window.history.back();
+        } ,2000);   
+        </script>";
                 }
             } else {
                 echo "
-            <script type='text/javascript'>
-            setTimeout(function () {    
-                swal({
-                    title: 'Format File Tidak Didukung',
-                    text:  'Format File Harus Berupa PNG atau JPG',
-                    type: 'warning',
-                    timer: 3000,
-                    showConfirmButton: true
-                });     
-            },10);  
-            window.setTimeout(function(){ 
-                window.history.back();
-            } ,2000);   
-            </script>";
+    <script type='text/javascript'>
+    setTimeout(function () {    
+        swal({
+            title: 'Format File Tidak Didukung',
+            text:  'Format File Harus Berupa PDF',
+            type: 'warning',
+            timer: 3000,
+            showConfirmButton: true
+        });     
+    },10);  
+    window.setTimeout(function(){ 
+        window.history.back();
+    } ,2000);   
+    </script>";
             }
         } else {
-            $nama_file = $row['file'];
+            $nama_filependidikan = $row['filependidikan'];
+            $e .= "Upload Success!";
+        }
+        if (!empty($_FILES['filediklat']['name'])) {
+            $filesubbagianlama = $row['filesubbagian'];
+            // UPLOAD file PEMOHON
+            $filesubbagian      = $_FILES['filesubbagian']['name'];
+            $x_filesubbagian    = explode('.', $filesubbagian);
+            $ext_filesubbagian  = end($x_filesubbagian);
+            $nama_filesubbagian = rand(1, 99999) . '.' . $ext_filesubbagian;
+            $size_filesubbagian = $_FILES['filesubbagian']['size'];
+            $tmp_filesubbagian  = $_FILES['filesubbagian']['tmp_name'];
+            $dir_filesubbagian  = '../../file/';
+            $allow_ext        = array('pdf');
+            $allow_size       = 2048 * 2048 * 3;
+            // var_dump($nama_file); die();
+
+            if (in_array($ext_filesubbagian, $allow_ext) === true) {
+                if ($size_filesubbagian <= $allow_size) {
+                    move_uploaded_file($tmp_filesubbagian, $dir_filesubbagian . $nama_filesubbagian);
+                    if (file_exists($dir_filesubbagian . $filesubbagianlama)) {
+                        unlink($dir_filesubbagian . $filesubbagianlama);
+                    }
+                    $e .= "Upload Success";
+                } else {
+                    echo "
+        <script type='text/javascript'>
+        setTimeout(function () {    
+            swal({
+                title: '',
+                text:  'Ukuran File Terlalu Besar, Maksimal 3 Mb',
+                type: 'warning',
+                timer: 3000,
+                showConfirmButton: true
+            });     
+        },10);  
+        window.setTimeout(function(){ 
+            window.history.back();
+        } ,2000);   
+        </script>";
+                }
+            } else {
+                echo "
+    <script type='text/javascript'>
+    setTimeout(function () {    
+        swal({
+            title: 'Format File Tidak Didukung',
+            text:  'Format File Harus Berupa PDF',
+            type: 'warning',
+            timer: 3000,
+            showConfirmButton: true
+        });     
+    },10);  
+    window.setTimeout(function(){ 
+        window.history.back();
+    } ,2000);   
+    </script>";
+            }
+        } else {
+            $nama_filesubbagian = $row['filesubbagian'];
             $e .= "Upload Success!";
         }
 
@@ -264,7 +323,8 @@ $row = $data->fetch_array();
         pendidikan = '$pendidikan',
         sub_bagian = '$sub_bagian',
         ket = '$ket',
-        file = '$nama_file'
+        filependidikan = '$nama_filependidikan',
+        filesubbagian = '$nama_filesubbagian'
         WHERE 
         id_ppnpn = '$id'
         ");

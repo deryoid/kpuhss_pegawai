@@ -73,20 +73,24 @@ include '../../templates/head.php';
                                                 <tr align="center">
                                                     <th></th>
                                                     <th>No</th>
-                                                    <th>Berkas Pendukung Berupa Zip/Rar/Pdf (Ijazah, SK, Dll)</th>
                                                     <th>Nama</th>
                                                     <th>Tempat Lahir</th>
                                                     <th>Tanggal Lahir</th>
                                                     <th>NIP</th>
+                                                    <th>SK Pangkat *Pdf</th>
                                                     <th>Pangkat Golongan</th>
                                                     <th>TMT</th>
+                                                    <th>SK Jabatan *Pdf</th>
                                                     <th>Jabatan Struktural</th>
                                                     <th>TMT</th>
+                                                    <th>SK Penempatan *Pdf</th>
                                                     <th>No SK Penempatan</th>
                                                     <th>JK</th>
                                                     <th>Agama</th>
+                                                    <th>Ijazah Pendidikan Terakhir*Pdf</th>
                                                     <th>Pendidikan Umum</th>
                                                     <th>TMT</th>
+                                                    <th>Sertifikat Diklat-diklat *Pdf</th>
                                                     <th>Diklat Struktural</th>
                                                     <th>Tanggal Keg. Struktural</th>
                                                     <th>Diklat Fungsional</th>
@@ -99,7 +103,7 @@ include '../../templates/head.php';
                                             <tbody style="background-color: white">
                                                 <?php
                                                 $no = 1;
-                                                $data = $koneksi->query("SELECT * FROM nominatif_pegawai ORDER BY id_pegawai ASC");
+                                                $data = $koneksi->query("SELECT * FROM nominatif_pegawai ORDER BY id_pegawai DESC");
                                                 while ($row = $data->fetch_array()) {
                                                 ?>
                                                     <tr>
@@ -108,20 +112,24 @@ include '../../templates/head.php';
                                                             <a href="hapus?id=<?= $row['id_pegawai'] ?>" class="btn btn-danger btn-sm alert-hapus" title="Hapus"><i class="fa fa-trash"></i> Hapus</a>
                                                         </td>
                                                         <td align="center"><?= $no++ ?></td>
-                                                        <td><a href="<?= base_url(); ?>/file/<?= $row['file'] ?>" class="btn btn-sm" title="Download"><i class="fa fa-download"></i> Download</i></a></td>
                                                         <td><?= $row['nama_pegawai'] ?></td>
                                                         <td><?= $row['tempat_lahir'] ?></td>
                                                         <td><?= $row['tanggal_lahir'] ?></td>
                                                         <td><?= $row['nip'] ?></td>
+                                                        <td><a target="_blank" href="<?= base_url(); ?>/file/<?= $row['filepangkat'] ?>" class="btn btn-xs bg-dark" title="View"><i class="fa fa-eye"></i> View</i></a></td>
                                                         <td><?= $row['pangkat_gol'] ?></td>
                                                         <td><?= $row['pangkat_tmt'] ?></td>
+                                                        <td><a target="_blank" href="<?= base_url(); ?>/file/<?= $row['filejabatan'] ?>" class="btn btn-xs bg-dark" title="View"><i class="fa fa-eye"></i> View</i></a></td>
                                                         <td><?= $row['jabatan_struktural'] ?></td>
                                                         <td><?= $row['jabatan_tmt'] ?></td>
+                                                        <td><a target="_blank" href="<?= base_url(); ?>/file/<?= $row['filepenempatan'] ?>" class="btn btn-sxsbg-dark " title="View"><i class="fa fa-eye"></i> View</i></a></td>
                                                         <td><?= $row['no_sk_penempatan'] ?></td>
                                                         <td><?= $row['jk'] ?></td>
                                                         <td><?= $row['agama'] ?></td>
+                                                        <td><a target="_blank" href="<?= base_url(); ?>/file/<?= $row['filependidikan'] ?>" class="btn btn-sxsbg-dark " title="View"><i class="fa fa-eye"></i> View</i></a></td>
                                                         <td><?= $row['pendidikan_umum'] ?></td>
                                                         <td><?= $row['pendidikan_tmt'] ?></td>
+                                                        <td><a href="<?= base_url(); ?>/file/<?= $row['filediklat'] ?>" class="btn btn-sxsbg-dark " title="View"><i class="fa fa-eye"></i> View</i></a></td>
                                                         <td><?= $row['diklat_struktural'] ?></td>
                                                         <td><?= $row['tgl_kegiatan_struktural'] ?></td>
                                                         <td><?= $row['diklat_fungsional'] ?></td>
