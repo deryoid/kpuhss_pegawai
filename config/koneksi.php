@@ -1,7 +1,7 @@
 <?php
 $host = "localhost";
 $user = "root";
-$password = "root";
+$password = "";
 $name = "kpu_hss_pegawai";
 
 $koneksi = mysqli_connect($host, $user, $password, $name);
