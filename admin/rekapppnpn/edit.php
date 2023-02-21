@@ -207,24 +207,6 @@ $row = $data->fetch_array();
                                                 <input type="number" class="form-control" name="khonghucu" value="<?= $row['khonghucu'] ?>">
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Es III</label>
-                                            <div class="col-sm-10">
-                                                <input type="number" class="form-control" name="es3" value="<?= $row['es3'] ?>">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Es IV</label>
-                                            <div class="col-sm-10">
-                                                <input type="number" class="form-control" name="es4" value="<?= $row['es4'] ?>">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Keterangan Jabatan Kosong</label>
-                                            <div class="col-sm-10">
-                                                <textarea type="text" class="form-control" name="ket_jabatan_kosong"><?= $row['ket_jabatan_kosong'] ?></textarea>
-                                            </div>
-                                        </div>
 
                                     </div>
                                     <!-- /.card-body -->

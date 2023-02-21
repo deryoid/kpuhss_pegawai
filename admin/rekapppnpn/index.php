@@ -166,7 +166,7 @@ include '../../templates/head.php';
                                     <h6>Pendidikan</h6>
                                 </div>
                                 <div style="width: 100%;margin: 0px auto;">
-                                    <canvas id="chartJK"></canvas>
+                                    <canvas id="chartPendidikan"></canvas>
                                 </div>
                             </div>
                         </div>
