@@ -130,21 +130,30 @@ if (isset($_POST['login'])) {
 
     if ($user == $username && $pass == $password) {
 
+
         $_SESSION['id_user']    = $id_user;
+        $_SESSION['nama']       = $namauser;
         $_SESSION['username']   = $username;
         $_SESSION['role']       = $role;
 
 
         if ($role == "Administrator") {
             echo "<script>window.location.replace('admin/');</script>";
-        } elseif ($role == "Owner") {
-            echo "<script>window.location.replace('kadis/');</script>";
+        } elseif ($role == "Kepala") {
+            echo "<script>window.location.replace('kepala/');</script>";
+        } elseif ($role == "PNS") {
+            $ptg = $koneksi->query("SELECT * FROM nominatif_pegawai AS p 
+          LEFT JOIN user AS u ON p.id_user = u.id_user
+          WHERE p.id_user = '$_SESSION[id_user]'
+          ")->fetch_array();
+            $_SESSION['nama_user']  = $ptg['nama_pegawai'];
+            $_SESSION['id_user'] = $ptg['id_user'];
+            echo "<script>window.location.replace('pns/');</script>";
+        } else {
+            $_SESSION['pesan'] = 'Username atau Password Tidak Ditemukan';
+            echo "<script>window.location.replace('login');</script>";
         }
-    } else {
-        $_SESSION['pesan'] = 'Username atau Password Tidak Ditemukan';
-        echo "<script>window.location.replace('login');</script>";
     }
 }
-
 
 ?>

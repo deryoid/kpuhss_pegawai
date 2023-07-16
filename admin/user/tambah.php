@@ -29,12 +29,12 @@ include '../../templates/head.php';
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Pegawai</h1>
+                            <h1 class="m-0 text-dark">USER</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Pegawai</li>
+                                <li class="breadcrumb-item active">USER</li>
                                 <li class="breadcrumb-item active">Tambah Data</li>
                             </ol>
                         </div><!-- /.col -->
@@ -52,39 +52,50 @@ include '../../templates/head.php';
                         <div class="row">
                             <div class="col-md-12">
                                 <!-- Horizontal Form -->
-                                <div class="card card-orange">
+                                <div class="card card-danger">
                                     <div class="card-header">
-                                        <h3 class="card-title">Pegawai</h3>
+                                        <h3 class="card-title">User</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
                                     <div class="card-body" style="background-color: white;">
 
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Nama</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" class="form-control" name="nama_user">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Jabatan</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" class="form-control" name="jabatan">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Alamat</label>
-                                            <div class="col-sm-8">
-                                                <textarea type="text" class="form-control" name="alamat"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Email</label>
-                                            <div class="col-sm-8">
-                                                <input type="email" class="form-control" name="email">
-                                            </div>
-                                        </div>
 
+                                        <div class="form-group row">
+                                            <label for="nama" class="col-sm-2 col-form-label">Nama</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="nama_user" name="nama_user">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="username" class="col-sm-2 col-form-label">Username</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="username" name="username">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="password" class="col-sm-2 col-form-label">Password</label>
+                                            <div class="col-sm-10">
+                                                <input type="password" class="form-control form-pass" name="password">
+                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                    <small>
+                                                        <input class="border-checkbox form-cek" type="checkbox" id="checkbox1">
+                                                        <label class="border-checkbox-label" for="checkbox1">Tampilkan Password</label>
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="username" class="col-sm-2 col-form-label">Hak Akses</label>
+                                            <div class="col-sm-10">
+                                                <select class="form-control select2" data-placeholder="Pilih Role" id="role" name="role" required="">
+                                                    <option value="">-Pilih-</option>
+                                                    <option value="PNS">PNS</option>
+                                                    <option value="PPNPN">PPNPN</option>
+                                                    <option value="Super Admin">Super Admin</option>
+                                                </select>
+                                            </div>
+                                        </div>
 
 
 
@@ -92,7 +103,7 @@ include '../../templates/head.php';
                                     <!-- /.card-body -->
 
                                     <div class="card-footer" style="background-color: white;">
-                                        <a href="<?= base_url('admin/pegawai/') ?>" class="btn bg-gradient-secondary float-right"><i class="fa fa-arrow-left"> Batal</i></a>
+                                        <a href="<?= base_url('admin/user/') ?>" class="btn bg-gradient-secondary float-right"><i class="fa fa-arrow-left"> Batal</i></a>
                                         <button type="submit" name="submit" class="btn bg-gradient-primary float-right mr-2"><i class="fa fa-save"> Simpan</i></button>
                                     </div>
                                     <!-- /.card-footer -->
@@ -136,32 +147,40 @@ include '../../templates/head.php';
 
         });
     </script>
+
     <?php
+
     if (isset($_POST['submit'])) {
-        $nama_user = $_POST['nama_user'];
-        $jabatan = $_POST['jabatan'];
-        $alamat  = $_POST['alamat'];
-        $email  = $_POST['email'];
+        $nama_user        = $_POST['nama_user'];
+        $username = $_POST['username'];
+        $password = md5($_POST['password']);
+        $role  = $_POST['role'];
+
 
         $submit = $koneksi->query("INSERT INTO user VALUES (
-        NULL,
-        '$nama_user', 
-        '$jabatan', 
-        '$alamat',
-        '$email',
-        NULL,
-        NULL,
-        NULL
-        )");
+            NULL,
+            '$nama_user',
+            '$username',
+            '$password',
+            '$role'
+            )");
         // var_dump($submit, $koneksi->error);
-        // die();
+        // die;
         if ($submit) {
-            $_SESSION['pesan'] = "Data Berhasil Ditambahkan";
-            echo "<script>window.location.replace('../pegawai/');</script>";
+            if ($role == "PNS") {
+                $pns =  $koneksi->query("SELECT * FROM user ORDER BY id_user DESC LIMIT 1")->fetch_array();
+                $koneksi->query("INSERT INTO nominatif_pegawai (id_user, nama_pegawai) VALUES ('$pns[id_user]', '$pns[nama_user]')");
+            } elseif ($role == "PPNPN") {
+                $ppnpn =  $koneksi->query("SELECT * FROM user ORDER BY id_user DESC LIMIT 1")->fetch_array();
+                $koneksi->query("INSERT INTO nominatif_ppnpn (id_user, nama_ppnpn) VALUES ('$ppnpn[id_user]', '$ppnpn[nama_user]')");
+            }
+            $_SESSION['pesan'] = "Data User Ditambahkan";
+            echo "<script>window.location.replace('../user/');</script>";
         }
     }
-
     ?>
+
+
 </body>
 
 </html>

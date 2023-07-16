@@ -31,12 +31,12 @@ include '../../templates/head.php';
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Nominatif PNS</h1>
+                            <h1 class="m-0 text-dark">Diklat PNS</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Beranda</a></li>
-                                <li class="breadcrumb-item active">Nominatif PNS</li>
+                                <li class="breadcrumb-item active">Diklat PNS</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -51,7 +51,7 @@ include '../../templates/head.php';
                         <div class="col-12">
                             <div class="card card-red card-outline">
                                 <div class="card-header">
-                                    <a href="tambah" class="btn bg-green"><i class="fa fa-plus-circle"> Tambah Data</i></a>
+                                    <a href="tambah" class="btn bg-green"><i class="fa fa-plus-circle"> Pengajuan Diklat</i></a>
                                     <a href="print" target="blank" class="btn bg-dark"><i class="fa fa-print"> Cetak</i></a>
                                 </div>
                                 <!-- /.card-header -->
@@ -71,58 +71,28 @@ include '../../templates/head.php';
                                         <table id="example1" class="table table-bordered table-striped">
                                             <thead class="bg-red">
                                                 <tr align="center">
-                                                    <th></th>
                                                     <th>No</th>
-                                                    <th>Nama</th>
-                                                    <th>Tempat Lahir</th>
-                                                    <th>Tanggal Lahir</th>
-                                                    <th>NIP</th>
-                                                    <th>SK Pangkat *Pdf</th>
-                                                    <th>Pangkat Golongan</th>
-                                                    <th>TMT</th>
-                                                    <th>SK Jabatan *Pdf</th>
-                                                    <th>Jabatan Struktural</th>
-                                                    <th>TMT</th>
-                                                    <th>SK Penempatan *Pdf</th>
-                                                    <th>No SK Penempatan</th>
-                                                    <th>JK</th>
-                                                    <th>Agama</th>
-                                                    <th>Ijazah Pendidikan Terakhir*Pdf</th>
-                                                    <th>Pendidikan Umum</th>
-                                                    <th>TMT</th>
-                                                    <th>Keterangan</th>
+                                                    <th>Jenis Diklat</th>
+                                                    <th>Status Diklat</th>
+                                                    <th>Surat Tugas</th>
+                                                    <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody style="background-color: white">
                                                 <?php
                                                 $no = 1;
-                                                $data = $koneksi->query("SELECT * FROM nominatif_pegawai ORDER BY id_pegawai DESC");
+                                                $data = $koneksi->query("SELECT * FROM diklat WHERE id_user = '$_SESSION[id_user]'");
                                                 while ($row = $data->fetch_array()) {
                                                 ?>
                                                     <tr>
-                                                        <td align="center">
-                                                            <a href="edit?id=<?= $row['id_pegawai'] ?>" class="btn btn-success btn-sm" title="Edit"><i class="fa fa-edit"></i> Edit</a>
-                                                            <a href="hapus?id=<?= $row['id_pegawai'] ?>" class="btn btn-danger btn-sm alert-hapus" title="Hapus"><i class="fa fa-trash"></i> Hapus</a>
-                                                        </td>
                                                         <td align="center"><?= $no++ ?></td>
-                                                        <td><?= $row['nama_pegawai'] ?></td>
-                                                        <td><?= $row['tempat_lahir'] ?></td>
-                                                        <td><?= $row['tanggal_lahir'] ?></td>
-                                                        <td><?= $row['nip'] ?></td>
-                                                        <td><a target="_blank" href="<?= base_url(); ?>/file/<?= $row['filepangkat'] ?>" class="btn btn-xs bg-dark" title="View"><i class="fa fa-eye"></i> View</i></a></td>
-                                                        <td><?= $row['pangkat_gol'] ?></td>
-                                                        <td><?= $row['pangkat_tmt'] ?></td>
-                                                        <td><a target="_blank" href="<?= base_url(); ?>/file/<?= $row['filejabatan'] ?>" class="btn btn-xs bg-dark" title="View"><i class="fa fa-eye"></i> View</i></a></td>
-                                                        <td><?= $row['jabatan_struktural'] ?></td>
-                                                        <td><?= $row['jabatan_tmt'] ?></td>
-                                                        <td><a target="_blank" href="<?= base_url(); ?>/file/<?= $row['filepenempatan'] ?>" class="btn btn-sxsbg-dark " title="View"><i class="fa fa-eye"></i> View</i></a></td>
-                                                        <td><?= $row['no_sk_penempatan'] ?></td>
-                                                        <td><?= $row['jk'] ?></td>
-                                                        <td><?= $row['agama'] ?></td>
-                                                        <td><a target="_blank" href="<?= base_url(); ?>/file/<?= $row['filependidikan'] ?>" class="btn btn-sxsbg-dark " title="View"><i class="fa fa-eye"></i> View</i></a></td>
-                                                        <td><?= $row['pendidikan_umum'] ?></td>
-                                                        <td><?= $row['pendidikan_tmt'] ?></td>
-                                                        <td><?= $row['keterangan'] ?></td>
+                                                        <td><?= $row['jenis_diklat'] ?></td>
+                                                        <td align="center"><b><?= $row['status_diklat'] ?></b></td>
+                                                        <td align="center"><a target="_blank" href="<?= base_url(); ?>/file/<?= $row['filest'] ?>" class="btn bg-dark btn-sm" title="Download"><i class="fa fa-download"></i> Download</i></a></td>
+
+                                                        <td align="center">
+                                                            <a href="hapus?id=<?= $row['id_diklat'] ?>" class="btn btn-danger btn-sm alert-hapus" title="Hapus"><i class="fa fa-trash"></i> Batalkan</a>
+                                                        </td>
                                                     </tr>
                                                 <?php } ?>
                                             </tbody>

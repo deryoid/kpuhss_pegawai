@@ -4,6 +4,12 @@ include '../../config/koneksi.php';
 
 $no = 1;
 
+$data = $koneksi->query("SELECT * FROM
+surat_masuk AS sm 
+LEFT JOIN pegawai AS p ON sm.id_peg = p.id_peg
+LEFT JOIN kategori AS k ON sm.id_kategori = k.id_kategori
+ORDER BY sm.id_sm DESC");
+
 $bln = array(
     '01' => 'Januari',
     '02' => 'Februari',
@@ -33,47 +39,46 @@ $bln = array(
 </head>
 
 <body>
-
+    <!-- <img src="<?= base_url('assets/dist/img/.png') ?>" align="left" width="90" height="90"> -->
     <p align="center"><b>
-            <img src="<?= base_url('assets/dist/img/kpu_logo.png') ?>" align="left" width="100" height="100">
-            <font size="8">KOMISI PEMILIHAN UMUM</font>
-            <br>
-            <font size="5">KABUPATEN HULU SUNGAI SELATAN
-            </font>
-            <br>
-            <br>
-            <hr size="1px" color="black">
+            <font size="5">Output Surat Masuk</font> <br>
+            <font size="5">DPRD KABUPATEN KOTABARU</font><br><br>
+            <hr size="2px" color="black">
         </b></p>
+
     <div class="row">
         <div class="col-sm-12">
             <div class="card-box table-responsive">
                 <table border="1" cellspacing="0" width="100%">
-                    <thead class="bg-orange">
-                        <tr align="center">
+                    <thead>
+                        <tr>
                             <th>No</th>
-                            <th>Nama </th>
-                            <th>Jabatan </th>
-                            <th>Alamat </th>
-                            <th>Email </th>
+                            <th>Nomor Surat Masuk</th>
+                            <th>Tanggal Terima</th>
+                            <th>Nama Pegawai</th>
+                            <th>Kategori</th>
+                            <th>Keterangan Surat</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
-                    <?php
-                    $no = 1;
-                    $data = $koneksi->query("SELECT * FROM user WHERE jabatan != 'Operator'");
-                    while ($row = $data->fetch_array()) {
-                    ?>
-                        <tbody style="background-color: white">
+
+                    <tbody>
+                        <?php while ($row = mysqli_fetch_array($data)) { ?>
                             <tr>
                                 <td align="center"><?= $no++ ?></td>
-                                <td><?= $row['nama_user'] ?></td>
-                                <td><?= $row['jabatan'] ?></td>
-                                <td><?= $row['alamat'] ?></td>
-                                <td><?= $row['email'] ?></td>
+                                <td><?= $row['no_surat'] ?></td>
+                                <td><?= tgl_indo($row['tgl_terima']) ?></td>
+                                <td><?= $row['nama'] ?></td>
+                                <td><?= $row['nama_kategori'] ?></td>
+                                <td><?= $row['ket_surat'] ?></td>
+                                <td>Verifikasi Admin : <?=  $row['status_admin'] ?>
+                                Verifikasi Pimpinan :<?=  $row['status_pimpinan'] ?></td>
                             </tr>
-                        </tbody>
-                    <?php } ?>
+                        <?php } ?>
                     </tbody>
+
                 </table>
+
             </div>
         </div>
     </div>
@@ -81,18 +86,6 @@ $bln = array(
 
     </div>
 
-    </div>
-    <div style="text-align: center; display: inline-block; float: right;">
-        <h5>
-            Kandangan , <?php echo tgl_indo(date('Y-m-d')); ?><br>
-            Ketua KPU
-            <br>
-            <br>
-            <br>
-            ...........
-        </h5>
-
-    </div>
 
 </body>
 

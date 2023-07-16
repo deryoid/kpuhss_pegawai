@@ -18,8 +18,8 @@
             <?php
             if ($_SESSION['role'] == "Administrator") {
               echo "Administrator";
-            } elseif ($_SESSION['role'] == "User") {
-              echo $_SESSION['nama'];
+            } elseif ($_SESSION['role'] == "PNS") {
+              echo $_SESSION['nama_user'];
             }
             ?>
           </i>
@@ -46,9 +46,21 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="<?= base_url('admin/user') ?>" class="nav-link">
+              <i class="fas fa-user nav-icon"></i>
+              <p>User</p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="<?= base_url('admin/pns') ?>" class="nav-link">
               <i class="fas fa-users nav-icon"></i>
               <p>Nominatif PNS</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="<?= base_url('admin/diklat') ?>" class="nav-link">
+              <i class="fas fa-info nav-icon"></i>
+              <p>Status Diklat PNS</p>
             </a>
           </li>
           <li class="nav-item">
@@ -145,7 +157,7 @@
       </nav>
       <!-- /.sidebar-menu -->
 
-    <?php } elseif ($_SESSION['role'] == "Owner") { ?>
+    <?php } elseif ($_SESSION['role'] == "PNS") { ?>
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -153,7 +165,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="<?= base_url('owner/index') ?>" class="nav-link">
+            <a href="<?= base_url('pns/index') ?>" class="nav-link">
               <i class="nav-icon fas fa-home"></i>
               <p>
                 Home
@@ -163,29 +175,30 @@
 
 
           <li class="nav-item">
-            <a href="<?= base_url('owner/antrian') ?>" class="nav-link">
-              <i class="nav-icon fas fa-clock"></i>
+            <a href="<?= base_url('pns/biodata') ?>" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
               <p>
-                Antrian Baru
+                Biodata Pegawai
               </p>
             </a>
           </li>
+
           <li class="nav-item">
-            <a href="<?= base_url('owner/prosesantrian') ?>" class="nav-link">
-              <i class="nav-icon fas fa-tools"></i>
+            <a href="<?= base_url('pns/diklat') ?>" class="nav-link">
+              <i class="nav-icon fas fa-reply"></i>
               <p>
-                Proses Pengerjaan
+                Pengajuan Diklat
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="<?= base_url('owner/prosespengambilan') ?>" class="nav-link">
-              <i class="nav-icon fas fa-car"></i>
+          <!-- <li class="nav-item">
+            <a href="<?= base_url('pns/statusdiklat') ?>" class="nav-link">
+              <i class="nav-icon fas fa-info"></i>
               <p>
-                Pengambilan
+                Status Diklat
               </p>
             </a>
-          </li>
+          </li> -->
 
         </ul>
       </nav>

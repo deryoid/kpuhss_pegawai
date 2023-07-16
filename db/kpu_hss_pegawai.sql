@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Waktu pembuatan: 20 Feb 2023 pada 06.40
+-- Waktu pembuatan: 16 Jul 2023 pada 09.25
 -- Versi server: 5.7.34
 -- Versi PHP: 7.4.21
 
@@ -20,6 +20,27 @@ SET time_zone = "+00:00";
 --
 -- Database: `kpu_hss_pegawai`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `diklat`
+--
+
+CREATE TABLE `diklat` (
+  `id_diklat` int(11) NOT NULL,
+  `jenis_diklat` varchar(20) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `status_diklat` varchar(50) NOT NULL,
+  `filest` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data untuk tabel `diklat`
+--
+
+INSERT INTO `diklat` (`id_diklat`, `jenis_diklat`, `id_user`, `status_diklat`, `filest`) VALUES
+(1, 'Diklat Fungsional', 11, 'Pengajuan', '67465.pdf');
 
 -- --------------------------------------------------------
 
@@ -42,36 +63,31 @@ CREATE TABLE `nominatif_pegawai` (
   `agama` varchar(50) DEFAULT NULL,
   `pendidikan_umum` varchar(50) DEFAULT NULL,
   `pendidikan_tmt` date DEFAULT NULL,
-  `diklat_struktural` varchar(155) DEFAULT NULL,
-  `tgl_kegiatan_struktural` date DEFAULT NULL,
-  `diklat_fungsional` varchar(155) DEFAULT NULL,
-  `tgl_kegiatan_fungsional` date DEFAULT NULL,
-  `diklat_teknis` varchar(155) DEFAULT NULL,
-  `tgl_kegiatan_teknis` date DEFAULT NULL,
   `keterangan` text,
-  `filepangkat` varchar(255) NOT NULL,
-  `filejabatan` varchar(255) NOT NULL,
-  `filepenempatan` varchar(255) NOT NULL,
-  `filependidikan` varchar(255) NOT NULL,
-  `filediklat` varchar(255) NOT NULL
+  `filepangkat` varchar(255) DEFAULT NULL,
+  `filejabatan` varchar(255) DEFAULT NULL,
+  `filepenempatan` varchar(255) DEFAULT NULL,
+  `filependidikan` varchar(255) DEFAULT NULL,
+  `id_user` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data untuk tabel `nominatif_pegawai`
 --
 
-INSERT INTO `nominatif_pegawai` (`id_pegawai`, `nama_pegawai`, `tempat_lahir`, `tanggal_lahir`, `nip`, `pangkat_gol`, `pangkat_tmt`, `jabatan_struktural`, `jabatan_tmt`, `no_sk_penempatan`, `jk`, `agama`, `pendidikan_umum`, `pendidikan_tmt`, `diklat_struktural`, `tgl_kegiatan_struktural`, `diklat_fungsional`, `tgl_kegiatan_fungsional`, `diklat_teknis`, `tgl_kegiatan_teknis`, `keterangan`, `filepangkat`, `filejabatan`, `filepenempatan`, `filependidikan`, `filediklat`) VALUES
-(2, 'H.GUSTI ACHMAD RIDUAN,S.Sos', 'Banjarmasin', '1965-06-27', '196506271986031011', 'Pembina Tk.I,IV/b', '2020-01-10', 'Sekretaris', '2020-09-15', '-', 'Laki-laki', 'Islam', 'S1', '1999-01-01', 'PIM III', '2013-03-05', '-', '2013-04-30', '-', '2013-05-21', 'Organik', '', '', '', '', ''),
-(3, 'WAWAN SETIAWAN,SH', 'Kandangan', '1986-06-01', '198606012010121004', 'Penata, IIIc', '2018-04-01', 'Kepala Sub Bagian Keungan,Umum dan Logistik', '2022-03-11', '-', 'Laki-laki', 'Islam', 'S1', '2010-04-01', '-', '2011-10-25', '-', '2011-03-10', 'Pengadaan Barang dan Jasa ', '2011-10-27', 'Organik', '', '', '', '', ''),
-(4, 'FARAH AGUSTINA SETIAWATI,SH', 'Ujung Pandang', '1984-09-28', '198408282010122003', 'Penata, IIIc', '2019-01-04', 'Kepala Sub. Bagian Hukum dan Sumber Daya Manusia', '2022-11-03', '-', 'Perempuan', 'Islam', 'S1', '2019-01-04', '-', '0001-01-01', '-', '0001-01-01', '-', '0001-01-01', 'Organik', '', '', '', '', ''),
-(5, 'SUCI LESTARI,S.Ikom', 'Hulu Sungai Tengah', '1985-08-01', '198501082010122006', 'Penata, IIIc', '2019-01-04', 'Penyusun Bahan Informasi dan Publikasi', '2020-03-08', '-', 'Perempuan', 'Islam', 'S1', '2009-01-04', '-', '0001-01-01', '-', '0001-01-01', '-', '0001-01-01', 'Organik', '', '', '', '', ''),
-(6, 'RUSMA ARIATI,SE', 'Karang Jawa', '1984-06-21', '198406212011012013', 'Penata,IIIc', '2019-01-04', 'Penyusun Program Anggaran dan Pelaporan', '2020-01-20', '-', 'Perempuan', 'Islam', 'S1', '2006-01-04', '-', '0001-01-01', '-', '0001-01-01', '-', '0001-01-01', 'Organik', '', '', '', '', ''),
-(7, 'HELMALINA', 'Banjarbaru', '1968-03-18', '196803181990032003', 'Penata Muda Tk.I, IIIb', '2010-04-01', 'Pemeriksa Laporan dan Transaksi Keuangan', '2021-01-04', '-', 'Perempuan', 'Islam', 'SMA', '1988-01-01', '-', '0001-01-01', '-', '0001-01-01', '-', '0001-01-01', 'Organik', '', '', '', '', ''),
-(8, 'SYAIFUL ANWAR', 'Banjarbaru', '1974-11-27', '197411272007101001', 'Pengatur Tk.I,IId', '2019-10-01', 'Pengelola Kepegawaian', '2022-03-18', '-', 'Laki-laki', 'Islam', 'SMA', '1994-03-01', '-', '0001-09-09', '-', '0001-01-01', '-', '0001-01-01', 'Organik', '', '', '', '', ''),
-(9, 'ZAINAL HILMI YUSTAN', 'Kandangan', '1982-10-25', '198210252007011003', 'Pengatur Tk.I,IId', '2019-05-01', 'Pengelola Data', '2020-08-03', '-', 'Laki-laki', 'Islam', 'SMA', '2001-04-01', '-', '0001-01-01', '-', '0001-01-01', '-', '0001-01-01', 'Organik', '', '', '', '', ''),
-(10, 'NAJMI HIDAYATI', 'Kandangan', '1985-06-08', '198506082007012003', 'Pengatur Tk.I,IId', '2019-04-01', 'Verifikator Keuangan', '2016-01-14', '-', 'Perempuan', 'Islam', 'SMA', '2003-05-01', '-', '0001-01-01', 'Bendahara Pengeluaran', '2011-11-22', '-', '0001-01-01', 'Organik', '', '', '', '', ''),
-(11, 'JAINAL ABIDIN', 'Kandangan', '1982-07-12', '198207122009101001', 'Pengatur,IIc', '2018-04-01', 'Pengadministrasi Umum', '2020-08-03', '-', 'Laki-laki', 'Islam', 'SMA', '2001-02-01', '-', '0001-01-01', '-', '0001-01-01', '-', '0001-01-01', 'Organik', '', '', '', '', ''),
-(12, '1234', '1234', '2023-02-27', '1234', '1234', '2023-01-29', '1234', '2023-02-20', '1234', 'Laki-laki', 'Islam', 'SMA', '2023-02-20', '1234', '2023-02-20', '1231234', '2023-02-20', '1234', '2023-02-20', '1231234', '21413.pdf', '98635.pdf', '37689.pdf', '57496.pdf', '75672.pdf');
+INSERT INTO `nominatif_pegawai` (`id_pegawai`, `nama_pegawai`, `tempat_lahir`, `tanggal_lahir`, `nip`, `pangkat_gol`, `pangkat_tmt`, `jabatan_struktural`, `jabatan_tmt`, `no_sk_penempatan`, `jk`, `agama`, `pendidikan_umum`, `pendidikan_tmt`, `keterangan`, `filepangkat`, `filejabatan`, `filepenempatan`, `filependidikan`, `id_user`) VALUES
+(2, 'H.GUSTI ACHMAD RIDUAN,S.Sos', 'Banjarmasin', '1965-06-27', '196506271986031011', 'Pembina Tk.I,IV/b', '2020-01-10', 'Sekretaris', '2020-09-15', '-', 'Laki-laki', 'Islam', 'S1', '1999-01-01', 'Organik', '', '', '', '', 0),
+(3, 'WAWAN SETIAWAN,SH', 'Kandangan', '1986-06-01', '198606012010121004', 'Penata, IIIc', '2018-04-01', 'Kepala Sub Bagian Keungan,Umum dan Logistik', '2022-03-11', '-', 'Laki-laki', 'Islam', 'S1', '2010-04-01', 'Organik', '', '', '', '', 0),
+(4, 'FARAH AGUSTINA SETIAWATI,SH', 'Ujung Pandang', '1984-09-28', '198408282010122003', 'Penata, IIIc', '2019-01-04', 'Kepala Sub. Bagian Hukum dan Sumber Daya Manusia', '2022-11-03', '-', 'Perempuan', 'Islam', 'S1', '2019-01-04', 'Organik', '', '', '', '', 0),
+(5, 'SUCI LESTARI,S.Ikom', 'Hulu Sungai Tengah', '1985-08-01', '198501082010122006', 'Penata, IIIc', '2019-01-04', 'Penyusun Bahan Informasi dan Publikasi', '2020-03-08', '-', 'Perempuan', 'Islam', 'S1', '2009-01-04', 'Organik', '', '', '', '', 0),
+(6, 'RUSMA ARIATI,SE', 'Karang Jawa', '1984-06-21', '198406212011012013', 'Penata,IIIc', '2019-01-04', 'Penyusun Program Anggaran dan Pelaporan', '2020-01-20', '-', 'Perempuan', 'Islam', 'S1', '2006-01-04', 'Organik', '', '', '', '', 0),
+(7, 'HELMALINA', 'Banjarbaru', '1968-03-18', '196803181990032003', 'Penata Muda Tk.I, IIIb', '2010-04-01', 'Pemeriksa Laporan dan Transaksi Keuangan', '2021-01-04', '-', 'Perempuan', 'Islam', 'SMA', '1988-01-01', 'Organik', '', '', '', '', 0),
+(8, 'SYAIFUL ANWAR', 'Banjarbaru', '1974-11-27', '197411272007101001', 'Pengatur Tk.I,IId', '2019-10-01', 'Pengelola Kepegawaian', '2022-03-18', '-', 'Laki-laki', 'Islam', 'SMA', '1994-03-01', 'Organik', '', '', '', '', 0),
+(9, 'ZAINAL HILMI YUSTAN', 'Kandangan', '1982-10-25', '198210252007011003', 'Pengatur Tk.I,IId', '2019-05-01', 'Pengelola Data', '2020-08-03', '-', 'Laki-laki', 'Islam', 'SMA', '2001-04-01', 'Organik', '', '', '', '', 0),
+(10, 'NAJMI HIDAYATI', 'Kandangan', '1985-06-08', '198506082007012003', 'Pengatur Tk.I,IId', '2019-04-01', 'Verifikator Keuangan', '2016-01-14', '-', 'Perempuan', 'Islam', 'SMA', '2003-05-01', 'Organik', '', '', '', '', 0),
+(11, 'JAINAL ABIDIN', 'Kandangan', '1982-07-12', '198207122009101001', 'Pengatur,IIc', '2018-04-01', 'Pengadministrasi Umum', '2020-08-03', '-', 'Laki-laki', 'Islam', 'SMA', '2001-02-01', 'Organik', '', '', '', '', 0),
+(12, '1234', '1234', '2023-02-27', '1234', '1234', '2023-01-29', '1234', '2023-02-20', '1234', 'Laki-laki', 'Islam', 'SMA', '2023-02-20', '1231234', '21413.pdf', '98635.pdf', '37689.pdf', '57496.pdf', 0),
+(13, 'Maria Ulfah', 'Kandangan', '2023-07-16', '123456', 'II B', '2023-07-16', '123', '2023-07-16', '123', 'Perempuan', 'Islam', 'S2', '2023-07-16', '123', '', '', '', '', 11);
 
 -- --------------------------------------------------------
 
@@ -81,17 +97,17 @@ INSERT INTO `nominatif_pegawai` (`id_pegawai`, `nama_pegawai`, `tempat_lahir`, `
 
 CREATE TABLE `nominatif_ppnpn` (
   `id_ppnpn` int(11) NOT NULL,
-  `nama_ppnpn` varchar(50) NOT NULL,
-  `tempat_lahir` varchar(40) NOT NULL,
-  `tanggal_lahir` date NOT NULL,
-  `jk` varchar(50) NOT NULL,
-  `agama` varchar(50) NOT NULL,
-  `pendidikan` varchar(50) NOT NULL,
-  `sub_bagian` varchar(50) NOT NULL,
-  `ket` text NOT NULL,
-  `filependidikan` varchar(255) NOT NULL,
-  `filesubbagian` varchar(255) NOT NULL,
-  `filepelatihan` varchar(255) NOT NULL
+  `nama_ppnpn` varchar(50) DEFAULT NULL,
+  `tempat_lahir` varchar(40) DEFAULT NULL,
+  `tanggal_lahir` date DEFAULT NULL,
+  `jk` varchar(50) DEFAULT NULL,
+  `agama` varchar(50) DEFAULT NULL,
+  `pendidikan` varchar(50) DEFAULT NULL,
+  `sub_bagian` varchar(50) DEFAULT NULL,
+  `ket` text,
+  `filependidikan` varchar(255) DEFAULT NULL,
+  `filesubbagian` varchar(255) DEFAULT NULL,
+  `filepelatihan` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -201,9 +217,6 @@ INSERT INTO `rekap_ppnpn` (`id_rekap_ppnpn`, `satker`, `jumlah_ppnpn`, `jk_lakil
 CREATE TABLE `user` (
   `id_user` int(11) NOT NULL,
   `nama_user` varchar(50) NOT NULL,
-  `jabatan` varchar(25) NOT NULL,
-  `alamat` text NOT NULL,
-  `email` varchar(25) NOT NULL,
   `username` varchar(25) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `role` varchar(20) DEFAULT NULL
@@ -213,18 +226,27 @@ CREATE TABLE `user` (
 -- Dumping data untuk tabel `user`
 --
 
-INSERT INTO `user` (`id_user`, `nama_user`, `jabatan`, `alamat`, `email`, `username`, `password`, `role`) VALUES
-(1, 'Agustina', 'Operator', 'Kandangan.', 'agustina@gmail.com', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Administrator');
+INSERT INTO `user` (`id_user`, `nama_user`, `username`, `password`, `role`) VALUES
+(1, 'Maulida', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Administrator'),
+(11, 'Maria Ulfah', 'maria', '827ccb0eea8a706c4c34a16891f84e7b', 'PNS');
 
 --
 -- Indexes for dumped tables
 --
 
 --
+-- Indeks untuk tabel `diklat`
+--
+ALTER TABLE `diklat`
+  ADD PRIMARY KEY (`id_diklat`),
+  ADD KEY `id_user` (`id_user`);
+
+--
 -- Indeks untuk tabel `nominatif_pegawai`
 --
 ALTER TABLE `nominatif_pegawai`
-  ADD PRIMARY KEY (`id_pegawai`);
+  ADD PRIMARY KEY (`id_pegawai`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Indeks untuk tabel `nominatif_ppnpn`
@@ -255,16 +277,22 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT untuk tabel `diklat`
+--
+ALTER TABLE `diklat`
+  MODIFY `id_diklat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT untuk tabel `nominatif_pegawai`
 --
 ALTER TABLE `nominatif_pegawai`
-  MODIFY `id_pegawai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_pegawai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT untuk tabel `nominatif_ppnpn`
 --
 ALTER TABLE `nominatif_ppnpn`
-  MODIFY `id_ppnpn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_ppnpn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `rekap_pns`
@@ -282,7 +310,7 @@ ALTER TABLE `rekap_ppnpn`
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

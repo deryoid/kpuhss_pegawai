@@ -6,6 +6,10 @@ require '../../config/koneksi.php';
 <html>
 <?php
 include '../../templates/head.php';
+
+$id = $_GET['id'];
+$data = $koneksi->query("SELECT * FROM nominatif_pegawai WHERE id_pegawai = '$id'");
+$row = $data->fetch_array();
 ?>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -35,7 +39,7 @@ include '../../templates/head.php';
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Beranda</a></li>
                                 <li class="breadcrumb-item active">Nominatif PNS</li>
-                                <li class="breadcrumb-item active">Tambah Data</li>
+                                <li class="breadcrumb-item active">Edit Data</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -62,81 +66,80 @@ include '../../templates/head.php';
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Nama</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" name="nama_pegawai">
+                                                <input type="text" class="form-control" name="nama_pegawai" value="<?= $row['nama_pegawai'] ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Tempat lahir</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" name="tempat_lahir">
+                                                <input type="text" class="form-control" name="tempat_lahir" value="<?= $row['tempat_lahir'] ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Tanggal Lahir</label>
                                             <div class="col-sm-10">
-                                                <input type="date" class="form-control" name="tanggal_lahir">
+                                                <input type="date" class="form-control" name="tanggal_lahir" value="<?= $row['tanggal_lahir'] ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">NIP</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" name="nip">
+                                                <input type="text" class="form-control" name="nip" value="<?= $row['nip'] ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Pangkat Gol</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" name="pangkat_gol">
+                                                <input type="text" class="form-control" name="pangkat_gol" value="<?= $row['pangkat_gol'] ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">TMT</label>
                                             <div class="col-sm-10">
-                                                <input type="date" class="form-control" name="pangkat_tmt">
+                                                <input type="date" class="form-control" name="pangkat_tmt" value="<?= $row['pangkat_tmt'] ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">SK Pangkat *Pdf</label>
                                             <div class="col-sm-10">
-                                                <input type="file" class="form-control" name="filepangkat">
+                                                <input type="file" class="form-control" name="filepangkat" value="<?= $row['filepangkat'] ?>">
                                             </div>
                                         </div>
-
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Jabatan Struktural</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" name="jabatan_struktural">
+                                                <input type="text" class="form-control" name="jabatan_struktural" value="<?= $row['jabatan_struktural'] ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">TMT</label>
                                             <div class="col-sm-10">
-                                                <input type="date" class="form-control" name="jabatan_tmt">
+                                                <input type="date" class="form-control" name="jabatan_tmt" value="<?= $row['jabatan_tmt'] ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">SK Jabatan *Pdf</label>
                                             <div class="col-sm-10">
-                                                <input type="file" class="form-control" name="filejabatan">
+                                                <input type="file" class="form-control" name="filejabatan" value="<?= $row['filejabatan'] ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">No. SK Penempatan</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" name="no_sk_penempatan">
+                                                <input type="text" class="form-control" name="no_sk_penempatan" value="<?= $row['no_sk_penempatan'] ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">SK Penempatan *Pdf</label>
                                             <div class="col-sm-10">
-                                                <input type="file" class="form-control" name="filepenempatan">
+                                                <input type="file" class="form-control" name="filepenempatan" value="<?= $row['filepenempatan'] ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Jenis Kelamin</label>
                                             <div class="col-sm-10">
                                                 <select class="form-control" data-placeholder="Pilih" name="jk">
-                                                    <option value="">-Pilih-</option>
+                                                    <option value="<?= $row['jk'] ?>"><?= $row['jk'] ?></option>
                                                     <option value="Laki-laki">Laki-laki</option>
                                                     <option value="Perempuan">Perempuan</option>
                                                 </select>
@@ -146,7 +149,7 @@ include '../../templates/head.php';
                                             <label class="col-sm-2 col-form-label">Agama</label>
                                             <div class="col-sm-10">
                                                 <select class="form-control" data-placeholder="Pilih" name="agama">
-                                                    <option value="">-Pilih-</option>
+                                                    <option value="<?= $row['agama'] ?>"><?= $row['agama'] ?></option>
                                                     <option value="Islam">Islam</option>
                                                     <option value="Protestan">Protestan</option>
                                                     <option value="Katolik">Katolik</option>
@@ -160,7 +163,7 @@ include '../../templates/head.php';
                                             <label class="col-sm-2 col-form-label">Pendidikan Umum</label>
                                             <div class="col-sm-10">
                                                 <select class="form-control" data-placeholder="Pilih" name="pendidikan_umum">
-                                                    <option value="">-Pilih-</option>
+                                                    <option value="<?= $row['pendidikan_umum'] ?>"><?= $row['pendidikan_umum'] ?></option>
                                                     <option value="SD">SD</option>
                                                     <option value="SMP">SMP</option>
                                                     <option value="SMA">SMA</option>
@@ -174,23 +177,63 @@ include '../../templates/head.php';
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">TMT</label>
                                             <div class="col-sm-10">
-                                                <input type="date" class="form-control" name="pendidikan_tmt">
+                                                <input type="date" class="form-control" name="pendidikan_tmt" value="<?= $row['pendidikan_tmt'] ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Ijazah Pendidikan Terakhir*Pdf</label>
+                                            <label class="col-sm-2 col-form-label">Ijazah Pendidikan Terakhir *Pdf</label>
                                             <div class="col-sm-10">
-                                                <input type="file" class="form-control" name="filependidikan">
+                                                <input type="file" class="form-control" name="filependidikan" value="<?= $row['filependidikan'] ?>">
                                             </div>
                                         </div>
-
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Diklat Stuktural</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" name="diklat_struktural" value="<?= $row['diklat_struktural'] ?>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Tgl Keg. Struktural</label>
+                                            <div class="col-sm-10">
+                                                <input type="date" class="form-control" name="tgl_kegiatan_struktural" value="<?= $row['tgl_kegiatan_struktural'] ?>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Diklat Fungsional</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" name="diklat_fungsional" value="<?= $row['diklat_fungsional'] ?>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Tgl Keg. Fungsional</label>
+                                            <div class="col-sm-10">
+                                                <input type="date" class="form-control" name="tgl_kegiatan_fungsional" value="<?= $row['tgl_kegiatan_fungsional'] ?>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Diklat Teknis</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" name="diklat_teknis" value="<?= $row['diklat_teknis'] ?>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Tgl Keg. Teknis</label>
+                                            <div class="col-sm-10">
+                                                <input type="date" class="form-control" name="tgl_kegiatan_teknis" value="<?= $row['tgl_kegiatan_teknis'] ?>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Sertifikat Diklat-diklat *Pdf</label>
+                                            <div class="col-sm-10">
+                                                <input type="file" class="form-control" name="filediklat" value="<?= $row['filediklat'] ?>">
+                                            </div>
+                                        </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Keterangan</label>
                                             <div class="col-sm-10">
-                                                <textarea type="text" class="form-control" name="keterangan"></textarea>
+                                                <textarea type="text" class="form-control" name="keterangan"><?= $row['keterangan'] ?></textarea>
                                             </div>
                                         </div>
-
                                     </div>
                                     <!-- /.card-body -->
 
@@ -227,8 +270,7 @@ include '../../templates/head.php';
     <!-- jQuery -->
     <?php include_once "../../templates/script.php"; ?>
 
-    <script>
-    </script>
+
     <?php
     if (isset($_POST['submit'])) {
         $nama_pegawai = $_POST['nama_pegawai'];
@@ -244,12 +286,19 @@ include '../../templates/head.php';
         $agama = $_POST['agama'];
         $pendidikan_umum = $_POST['pendidikan_umum'];
         $pendidikan_tmt = $_POST['pendidikan_tmt'];
+        $diklat_struktural = $_POST['diklat_struktural'];
+        $tgl_kegiatan_struktural = $_POST['tgl_kegiatan_struktural'];
+        $diklat_fungsional = $_POST['diklat_fungsional'];
+        $tgl_kegiatan_fungsional = $_POST['tgl_kegiatan_fungsional'];
+        $diklat_teknis = $_POST['diklat_teknis'];
+        $tgl_kegiatan_teknis = $_POST['tgl_kegiatan_teknis'];
         $keterangan = $_POST['keterangan'];
+
 
 
         // CEK APAKAH file DIGANTI
         if (!empty($_FILES['filepangkat']['name'])) {
-
+            $filepangkatlama = $row['filepangkat'];
             // UPLOAD file PEMOHON
             $filepangkat      = $_FILES['filepangkat']['name'];
             $x_filepangkat    = explode('.', $filepangkat);
@@ -265,10 +314,10 @@ include '../../templates/head.php';
             if (in_array($ext_filepangkat, $allow_ext) === true) {
                 if ($size_filepangkat <= $allow_size) {
                     move_uploaded_file($tmp_filepangkat, $dir_filepangkat . $nama_filepangkat);
-                    // if (file_exists($dir_file . $filelama)) {
-                    //     unlink($dir_file . $filelama);
-                    // }
-                    // $e .= "Upload Success"; 
+                    if (file_exists($dir_filepangkat . $filepangkatlama)) {
+                        unlink($dir_filepangkat . $filepangkatlama);
+                    }
+                    $e .= "Upload Success";
                 } else {
                     echo "
         <script type='text/javascript'>
@@ -303,10 +352,13 @@ include '../../templates/head.php';
     } ,2000);   
     </script>";
             }
+        } else {
+            $nama_filepangkat = $row['filepangkat'];
+            $e .= "Upload Success!";
         }
 
         if (!empty($_FILES['filejabatan']['name'])) {
-
+            $filejabatanlama = $row['filejabatan'];
             // UPLOAD file PEMOHON
             $filejabatan      = $_FILES['filejabatan']['name'];
             $x_filejabatan    = explode('.', $filejabatan);
@@ -322,10 +374,10 @@ include '../../templates/head.php';
             if (in_array($ext_filejabatan, $allow_ext) === true) {
                 if ($size_filejabatan <= $allow_size) {
                     move_uploaded_file($tmp_filejabatan, $dir_filejabatan . $nama_filejabatan);
-                    // if (file_exists($dir_file . $filelama)) {
-                    //     unlink($dir_file . $filelama);
-                    // }
-                    // $e .= "Upload Success"; 
+                    if (file_exists($dir_filejabatan . $filejabatanlama)) {
+                        unlink($dir_filejabatan . $filejabatanlama);
+                    }
+                    $e .= "Upload Success";
                 } else {
                     echo "
         <script type='text/javascript'>
@@ -360,9 +412,12 @@ include '../../templates/head.php';
     } ,2000);   
     </script>";
             }
+        } else {
+            $nama_filejabatan = $row['filejabatan'];
+            $e .= "Upload Success!";
         }
         if (!empty($_FILES['filepenempatan']['name'])) {
-
+            $filepenempatanlama = $row['filepenempatan'];
             // UPLOAD file PEMOHON
             $filepenempatan      = $_FILES['filepenempatan']['name'];
             $x_filepenempatan    = explode('.', $filepenempatan);
@@ -378,10 +433,10 @@ include '../../templates/head.php';
             if (in_array($ext_filepenempatan, $allow_ext) === true) {
                 if ($size_filepenempatan <= $allow_size) {
                     move_uploaded_file($tmp_filepenempatan, $dir_filepenempatan . $nama_filepenempatan);
-                    // if (file_exists($dir_file . $filelama)) {
-                    //     unlink($dir_file . $filelama);
-                    // }
-                    // $e .= "Upload Success"; 
+                    if (file_exists($dir_filepenempatan . $filepenempatanlama)) {
+                        unlink($dir_filepenempatan . $filepenempatanlama);
+                    }
+                    $e .= "Upload Success";
                 } else {
                     echo "
         <script type='text/javascript'>
@@ -416,9 +471,12 @@ include '../../templates/head.php';
     } ,2000);   
     </script>";
             }
+        } else {
+            $nama_filepenempatan = $row['filepenempatan'];
+            $e .= "Upload Success!";
         }
         if (!empty($_FILES['filependidikan']['name'])) {
-
+            $filependidikanlama = $row['filependidikan'];
             // UPLOAD file PEMOHON
             $filependidikan      = $_FILES['filependidikan']['name'];
             $x_filependidikan    = explode('.', $filependidikan);
@@ -434,10 +492,10 @@ include '../../templates/head.php';
             if (in_array($ext_filependidikan, $allow_ext) === true) {
                 if ($size_filependidikan <= $allow_size) {
                     move_uploaded_file($tmp_filependidikan, $dir_filependidikan . $nama_filependidikan);
-                    // if (file_exists($dir_file . $filelama)) {
-                    //     unlink($dir_file . $filelama);
-                    // }
-                    // $e .= "Upload Success"; 
+                    if (file_exists($dir_filependidikan . $filependidikanlama)) {
+                        unlink($dir_filependidikan . $filependidikanlama);
+                    }
+                    $e .= "Upload Success";
                 } else {
                     echo "
         <script type='text/javascript'>
@@ -472,37 +530,108 @@ include '../../templates/head.php';
     } ,2000);   
     </script>";
             }
+        } else {
+            $nama_filependidikan = $row['filependidikan'];
+            $e .= "Upload Success!";
         }
+        if (!empty($_FILES['filediklat']['name'])) {
+            $filediklatlama = $row['filediklat'];
+            // UPLOAD file PEMOHON
+            $filediklat      = $_FILES['filediklat']['name'];
+            $x_filediklat    = explode('.', $filediklat);
+            $ext_filediklat  = end($x_filediklat);
+            $nama_filediklat = rand(1, 99999) . '.' . $ext_filediklat;
+            $size_filediklat = $_FILES['filediklat']['size'];
+            $tmp_filediklat  = $_FILES['filediklat']['tmp_name'];
+            $dir_filediklat  = '../../file/';
+            $allow_ext        = array('pdf');
+            $allow_size       = 2048 * 2048 * 3;
+            // var_dump($nama_file); die();
 
-        $submit = $koneksi->query("INSERT INTO nominatif_pegawai VALUES (
-        NULL,
-        '$nama_pegawai',
-        '$tempat_lahir',
-        '$tanggal_lahir',
-        '$nip',
-        '$pangkat_gol',
-        '$pangkat_tmt',
-        '$jabatan_struktural',
-        '$jabatan_tmt',
-        '$no_sk_penempatan',
-        '$jk',
-        '$agama',
-        '$pendidikan_umum',
-        '$pendidikan_tmt',
-        '$keterangan',
-        '$nama_filepangkat',
-        '$nama_filejabatan',
-        '$nama_filepenempatan',
-        '$nama_filependidikan'
-        )");
-        // var_dump($submit, $koneksi->error);
-        // die();
-        if ($submit) {
-            $_SESSION['pesan'] = "Data Berhasil Ditambahkan";
-            echo "<script>window.location.replace('../pns/');</script>";
+            if (in_array($ext_filediklat, $allow_ext) === true) {
+                if ($size_filediklat <= $allow_size) {
+                    move_uploaded_file($tmp_filediklat, $dir_filediklat . $nama_filediklat);
+                    if (file_exists($dir_filediklat . $filediklatlama)) {
+                        unlink($dir_filediklat . $filediklatlama);
+                    }
+                    $e .= "Upload Success";
+                } else {
+                    echo "
+        <script type='text/javascript'>
+        setTimeout(function () {    
+            swal({
+                title: '',
+                text:  'Ukuran File Terlalu Besar, Maksimal 3 Mb',
+                type: 'warning',
+                timer: 3000,
+                showConfirmButton: true
+            });     
+        },10);  
+        window.setTimeout(function(){ 
+            window.history.back();
+        } ,2000);   
+        </script>";
+                }
+            } else {
+                echo "
+    <script type='text/javascript'>
+    setTimeout(function () {    
+        swal({
+            title: 'Format File Tidak Didukung',
+            text:  'Format File Harus Berupa PDF',
+            type: 'warning',
+            timer: 3000,
+            showConfirmButton: true
+        });     
+    },10);  
+    window.setTimeout(function(){ 
+        window.history.back();
+    } ,2000);   
+    </script>";
+            }
+        } else {
+            $nama_filediklat = $row['filediklat'];
+            $e .= "Upload Success!";
+        }
+        if (!empty($e)) {
+
+            $submit = $koneksi->query("UPDATE nominatif_pegawai SET 
+        nama_pegawai = '$nama_pegawai',
+        tempat_lahir = '$tempat_lahir',
+        tanggal_lahir = '$tanggal_lahir',
+        nip = '$nip',
+        pangkat_gol = '$pangkat_gol',
+        pangkat_tmt = '$pangkat_tmt',
+        jabatan_struktural = '$jabatan_struktural',
+        jabatan_tmt = '$jabatan_tmt',
+        no_sk_penempatan = '$no_sk_penempatan',
+        jk = '$jk',
+        agama = '$agama',
+        pendidikan_umum = '$pendidikan_umum',
+        pendidikan_tmt = '$pendidikan_tmt',
+        diklat_struktural = '$diklat_struktural',
+        tgl_kegiatan_struktural = '$tgl_kegiatan_struktural',
+        diklat_fungsional = '$diklat_fungsional',
+        tgl_kegiatan_fungsional = '$tgl_kegiatan_fungsional',
+        diklat_teknis = '$diklat_teknis',
+        tgl_kegiatan_teknis = '$tgl_kegiatan_teknis',
+        keterangan = '$keterangan',
+        filepangkat = '$nama_filepangkat',
+        filejabatan = '$nama_filejabatan',
+        filepenempatan = '$nama_filepenempatan',
+        filependidikan = '$nama_filependidikan',
+        filediklat = '$nama_filediklat'
+        WHERE 
+        id_pegawai = '$id'
+        ");
+
+
+            if ($submit) {
+                $_SESSION['pesan'] = "Data Berhasil Diubah";
+                echo "<script>window.location.replace('../pns/');</script>";
+            }
         }
     }
-
     ?>
 </body>
 

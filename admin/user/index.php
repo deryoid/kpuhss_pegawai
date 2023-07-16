@@ -30,12 +30,12 @@ include '../../templates/head.php';
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Pegawai</h1>
+                            <h1 class="m-0 text-dark">User</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Data Master</a></li>
-                                <li class="breadcrumb-item active">Pegawai</li>
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">User</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -48,10 +48,10 @@ include '../../templates/head.php';
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
-                            <div class="card card-orange card-outline">
+                            <div class="card card-danger card-outline">
                                 <div class="card-header">
-                                    <a href="tambah" class="btn bg-orange"><i class="fa fa-plus-circle"> Tambah Data</i></a>
-                                    <a href="print" target="blank" class="btn bg-info"><i class="fa fa-print"> Cetak</i></a>
+                                    <a href="tambah" class="btn bg-green"><i class="fa fa-plus-circle"> Tambah Data</i></a>
+                                    <!-- <a href="modal_cetak" target="blank" class="btn bg-white"><i class="fa fa-print"> Cetak</i></a> -->
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
@@ -68,36 +68,33 @@ include '../../templates/head.php';
 
                                     <div class="table-responsive">
                                         <table id="example1" class="table table-bordered table-striped">
-                                            <thead class="bg-orange">
+                                            <thead class="bg-danger">
                                                 <tr align="center">
                                                     <th>No</th>
-                                                    <th>Nama </th>
-                                                    <th>Jabatan </th>
-                                                    <th>Alamat </th>
-                                                    <th>Email </th>
+                                                    <th>Nama</th>
+                                                    <th>Username</th>
+                                                    <th>Hak Akses</th>
                                                     <th>Opsi</th>
                                                 </tr>
                                             </thead>
-                                            <?php
-                                            $no = 1;
-                                            $data = $koneksi->query("SELECT * FROM user WHERE jabatan != 'Operator'");
-                                            while ($row = $data->fetch_array()) {
-                                            ?>
-                                                <tbody style="background-color: white">
+                                            <tbody style="background-color: azure">
+                                                <?php
+                                                $no = 1;
+                                                $data = $koneksi->query("SELECT * FROM user");
+                                                while ($row = $data->fetch_array()) {
+                                                ?>
                                                     <tr>
                                                         <td align="center"><?= $no++ ?></td>
                                                         <td><?= $row['nama_user'] ?></td>
-                                                        <td><?= $row['jabatan'] ?></td>
-                                                        <td><?= $row['alamat'] ?></td>
-                                                        <td><?= $row['email'] ?></td>
+                                                        <td><?= $row['username'] ?></td>
+                                                        <td><?= $row['role'] ?></td>
                                                         <td align="center">
                                                             <a href="edit?id=<?= $row['id_user'] ?>" class="btn btn-success btn-sm" title="Edit"><i class="fa fa-edit"></i></a>
                                                             <a href="hapus?id=<?= $row['id_user'] ?>" class="btn btn-danger btn-sm alert-hapus" title="Hapus"><i class="fa fa-trash"></i></a>
-
                                                         </td>
                                                     </tr>
-                                                </tbody>
-                                            <?php } ?>
+                                                <?php } ?>
+                                            </tbody>
                                         </table>
                                     </div>
 
