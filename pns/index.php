@@ -47,30 +47,78 @@ include '../templates/head.php';
           <!-- Small boxes (Stat box) -->
 
 
-          <!-- <div class="info-box bg-success">
-            <span class="info-box-icon"><i class="fa fa-truck-pickup"></i></span>
+          <div class="info-box bg-red">
             <div class="info-box-content">
-              <h3><span class="info-box-text">"BACKLOG SYSTEM CONTROL"</span></h3>
+              <h3><span class="info-box-text text-center">KPU Hulu Sungai Selatan</span></h3>
             </div>
-          </div> -->
-
+          </div>
 
           <div class="row">
-            <div class="col-12">
-              <div class="card">
-                <div class="card-body">
-                  <center>
-                    <img src="<?= base_url() ?>/assets/dist/img/bg.png" height="400" width="600">
-                  </center>
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-info">
+                <div class="inner">
+                  <h5 align="center">Jadwal Diklat</h5>
                 </div>
+                <a href="<?= base_url('pns/diklat') ?>" class="small-box-footer">Klik Disini <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-info">
+                <div class="inner">
+                  <h5 align="center">Diklat Luar Kota</h5>
+                </div>
+                <a href="<?= base_url('pns/diklatluarkota') ?>" class="small-box-footer">Klik Disini <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-info">
+                <div class="inner">
+                  <h5 align="center">Diklat Dalam Kota</h5>
+                </div>
+                <a href="<?= base_url('pns/diklatdalamkota') ?>" class="small-box-footer">Klik Disini <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-info">
+                <div class="inner">
+                  <h5 align="center">Surat Tugas/Diklat yang diikuti</h5>
+                </div>
+                <a href="<?= base_url('pns/diklatdiikuti') ?>" class="small-box-footer">Klik Disini <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <!-- ./col -->
           </div>
 
-
-          <div class="col-md-12">
-
+          <div class="row">
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-info">
+                <div class="inner">
+                  <h5 align="center">Diklat Selesai Diikuti</h5>
+                </div>
+                <a href="<?= base_url('pns/diklatselesai') ?>" class="small-box-footer">Klik Disini <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-info">
+                <div class="inner">
+                  <h5 align="center">Sertifikat Diklat</h5>
+                </div>
+                <a href="<?= base_url('pns/sertifikatdiklat') ?>" class="small-box-footer">Klik Disini <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            <!-- ./col -->
           </div>
+
           <!-- /.row -->
 
         </div><!-- /.container-fluid -->

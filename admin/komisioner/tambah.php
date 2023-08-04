@@ -29,12 +29,12 @@ include '../../templates/head.php';
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Diklat </h1>
+                            <h1 class="m-0 text-dark">Komisoner</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Beranda</a></li>
-                                <li class="breadcrumb-item active">Diklat </li>
+                                <li class="breadcrumb-item active">Komisoner</li>
                                 <li class="breadcrumb-item active">Tambah Data</li>
                             </ol>
                         </div><!-- /.col -->
@@ -54,72 +54,80 @@ include '../../templates/head.php';
                                 <!-- Horizontal Form -->
                                 <div class="card card-red">
                                     <div class="card-header">
-                                        <h3 class="card-title">Diklat </h3>
+                                        <h3 class="card-title">Komisoner</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <!-- form start -->
                                     <div class="card-body" style="background-color: white;">
-
                                         <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Nama Pegawai</label>
+                                            <label class="col-sm-2 col-form-label">Nama</label>
                                             <div class="col-sm-10">
-                                                <select class="form control select2" name="id_user" data-placeholder="Pilih" style="width: 100%;" required>
-                                                    <option value=""></option>
-                                                    <?php
-                                                    $k = $koneksi->query("SELECT * FROM user AS u 
-                                                    LEFT JOIN nominatif_pegawai AS np ON u.id_user = np.id_user");
-                                                    foreach ($k as $item) {
-                                                    ?>
-                                                        <option value="<?= $item['id_user'] ?>">
-                                                            <?= $item['nama_pegawai'] ?>
-                                                        </option>
-
-                                                    <?php } ?>
-                                                </select>
+                                                <input type="text" class="form-control" name="nama_komisioner">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label"> Kegiatan</label>
+                                            <label class="col-sm-2 col-form-label">Tempat lahir</label>
                                             <div class="col-sm-10">
-                                                <select class="form control select2" name="id_kegiatan" data-placeholder="Pilih" style="width: 100%;" required>
-                                                    <option value=""></option>
-                                                    <?php
-                                                    $k = $koneksi->query("SELECT * FROM kegiatan");
-                                                    foreach ($k as $item) {
-                                                    ?>
-                                                        <option value="<?= $item['id_kegiatan'] ?>">
-                                                            Nama Kegiatan : <?= $item['nama_kegiatan'] ?> |
-                                                            Tanggal Kegiatan : <?= $item['tgl_mulai'] . " S/d " . $item['tgl_selesai'] ?> |
-                                                            Deskripsi : <?= $item['deskripsi'] ?>
-                                                        </option>
-
-                                                    <?php } ?>
-                                                </select>
+                                                <input type="text" class="form-control" name="tempat_lahir">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label"> Status Diklat</label>
+                                            <label class="col-sm-2 col-form-label">Tanggal Lahir</label>
                                             <div class="col-sm-10">
-                                                <select class="form-control" data-placeholder="Pilih" name="status_diklat">
+                                                <input type="date" class="form-control" name="tanggal_lahir">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">No. SK Penempatan</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" name="no_sk_penempatan">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">SK Penempatan *Pdf</label>
+                                            <div class="col-sm-10">
+                                                <input type="file" class="form-control" name="filepenempatan">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Jenis Kelamin</label>
+                                            <div class="col-sm-10">
+                                                <select class="form-control" data-placeholder="Pilih" name="jk">
                                                     <option value="">-Pilih-</option>
-                                                    <option value="Pelaksanaan">Pelaksanaan</option>
-                                                    <option value="Selesai">Selesai</option>
+                                                    <option value="Laki-laki">Laki-laki</option>
+                                                    <option value="Perempuan">Perempuan</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Upload Surat Tugas</label>
+                                            <label class="col-sm-2 col-form-label">Agama</label>
                                             <div class="col-sm-10">
-                                                <input type="file" class="form-control" name="filest">
+                                                <select class="form-control" data-placeholder="Pilih" name="agama">
+                                                    <option value="">-Pilih-</option>
+                                                    <option value="Islam">Islam</option>
+                                                    <option value="Protestan">Protestan</option>
+                                                    <option value="Katolik">Katolik</option>
+                                                    <option value="Hindu">Hindu</option>
+                                                    <option value="Budha">Budha</option>
+                                                    <option value="Khonghucu">Khonghucu</option>
+                                                </select>
                                             </div>
                                         </div>
 
+
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Keterangan</label>
+                                            <div class="col-sm-10">
+                                                <textarea type="text" class="form-control" name="keterangan"></textarea>
+                                            </div>
+                                        </div>
 
                                     </div>
                                     <!-- /.card-body -->
 
                                     <div class="card-footer" style="background-color: white;">
-                                        <a href="<?= base_url('admin/diklat/') ?>" class="btn bg-gradient-secondary float-right"><i class="fa fa-arrow-left"> Batal</i></a>
+                                        <a href="<?= base_url('admin/komisioner/') ?>" class="btn bg-gradient-secondary float-right"><i class="fa fa-arrow-left"> Batal</i></a>
                                         <button type="submit" name="submit" class="btn bg-gradient-primary float-right mr-2"><i class="fa fa-save"> Simpan</i></button>
                                     </div>
                                     <!-- /.card-footer -->
@@ -155,28 +163,32 @@ include '../../templates/head.php';
     </script>
     <?php
     if (isset($_POST['submit'])) {
-        $id_kegiatan = $_POST['id_kegiatan'];
-        $id_user = $_POST['id_user'];
-        $status_diklat = $_POST['status_diklat'];
+        $nama_komisioner = $_POST['nama_komisioner'];
+        $tempat_lahir = $_POST['tempat_lahir'];
+        $tanggal_lahir = $_POST['tanggal_lahir'];
+        $no_sk_penempatan = $_POST['no_sk_penempatan'];
+        $jk = $_POST['jk'];
+        $agama = $_POST['agama'];
+        $keterangan = $_POST['keterangan'];
 
 
-        if (!empty($_FILES['filest']['name'])) {
+        if (!empty($_FILES['filepenempatan']['name'])) {
 
             // UPLOAD file PEMOHON
-            $filest      = $_FILES['filest']['name'];
-            $x_filest    = explode('.', $filest);
-            $ext_filest  = end($x_filest);
-            $nama_filest = rand(1, 99999) . '.' . $ext_filest;
-            $size_filest = $_FILES['filest']['size'];
-            $tmp_filest  = $_FILES['filest']['tmp_name'];
-            $dir_filest  = '../../file/';
+            $filepenempatan      = $_FILES['filepenempatan']['name'];
+            $x_filepenempatan    = explode('.', $filepenempatan);
+            $ext_filepenempatan  = end($x_filepenempatan);
+            $nama_filepenempatan = rand(1, 99999) . '.' . $ext_filepenempatan;
+            $size_filepenempatan = $_FILES['filepenempatan']['size'];
+            $tmp_filepenempatan  = $_FILES['filepenempatan']['tmp_name'];
+            $dir_filepenempatan  = '../../file/';
             $allow_ext        = array('pdf');
             $allow_size       = 2048 * 2048 * 3;
             // var_dump($nama_file); die();
 
-            if (in_array($ext_filest, $allow_ext) === true) {
-                if ($size_filest <= $allow_size) {
-                    move_uploaded_file($tmp_filest, $dir_filest . $nama_filest);
+            if (in_array($ext_filepenempatan, $allow_ext) === true) {
+                if ($size_filepenempatan <= $allow_size) {
+                    move_uploaded_file($tmp_filepenempatan, $dir_filepenempatan . $nama_filepenempatan);
                     // if (file_exists($dir_file . $filelama)) {
                     //     unlink($dir_file . $filelama);
                     // }
@@ -218,18 +230,22 @@ include '../../templates/head.php';
         }
 
 
-        $submit = $koneksi->query("INSERT INTO diklat VALUES (
+        $submit = $koneksi->query("INSERT INTO nominatif_komisioner VALUES (
         NULL,
-        '$id_kegiatan',
-        '$id_user',
-        '$status_diklat',
-        '$nama_filest'
+        '$nama_komisioner',
+        '$tempat_lahir',
+        '$tanggal_lahir',
+        '$no_sk_penempatan',
+        '$jk',
+        '$agama',
+        '$keterangan',
+        '$nama_filepenempatan'
         )");
         // var_dump($submit, $koneksi->error);
         // die();
         if ($submit) {
             $_SESSION['pesan'] = "Data Berhasil Ditambahkan";
-            echo "<script>window.location.replace('../diklat/');</script>";
+            echo "<script>window.location.replace('../komisioner/');</script>";
         }
     }
 

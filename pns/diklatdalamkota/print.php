@@ -43,13 +43,11 @@ $bln = array(
             <br>
             <br>
             <hr size="1px" color="black">
-            <font size="2">DATA DIKLAT
-            </font>
         </b></p>
     <div class="row">
         <div class="col-sm-12">
             <div class="card-box table-responsive">
-                <h4>Tahun : 2022</h4>
+                <h3 align="center">Diklat Dalam Kota</h3>
                 <table border="1" cellspacing="0" width="100%">
                     <thead>
                         <tr align="center">
@@ -66,7 +64,7 @@ $bln = array(
                                                 LEFT JOIN user AS u ON d.id_user = u.id_user
                                                 LEFT JOIN nominatif_pegawai AS np ON u.id_user = np.id_user
                                                 LEFT JOIN kegiatan AS k ON d.id_kegiatan = k.id_kegiatan
-                                                WHERE d.id_user = '$_SESSION[id_user]' AND k.tahun = '2022'
+                                                WHERE d.id_user = '$_SESSION[id_user]' AND k.luar_dalam = 'Dalam Kota'
                                                 ");
                         while ($row = $data->fetch_array()) {
                         ?>
@@ -81,48 +79,6 @@ $bln = array(
                                     <?= $row['lokasi'] ?>
                                 </td>
                                 <td align="center"><b><?= $row['status_diklat'] ?></b></td>
-
-                            </tr>
-                        <?php } ?>
-                    </tbody>
-
-                </table>
-
-            </div>
-            <div class="card-box table-responsive">
-                <h4>Tahun : 2023</h4>
-                <table border="1" cellspacing="0" width="100%">
-                    <thead>
-                        <tr align="center">
-                            <th>No</th>
-                            <th>Nama Pegawai</th>
-                            <th>Diklat</th>
-                            <th>Status Diklat</th>
-                        </tr>
-                    </thead>
-                    <tbody style="background-color: white">
-                        <?php
-                        $no = 1;
-                        $data = $koneksi->query("SELECT * FROM diklat AS d
-                                                LEFT JOIN user AS u ON d.id_user = u.id_user
-                                                LEFT JOIN nominatif_pegawai AS np ON u.id_user = np.id_user
-                                                LEFT JOIN kegiatan AS k ON d.id_kegiatan = k.id_kegiatan
-                                                WHERE d.id_user = '$_SESSION[id_user]' AND k.tahun = '2023'
-                                                ");
-                        while ($row = $data->fetch_array()) {
-                        ?>
-                            <tr>
-                                <td align="center"><?= $no++ ?></td>
-                                <td>
-                                    <?= $row['nama_pegawai'] ?>
-                                </td>
-                                <td>
-                                    <?= $row['nama_kegiatan'] ?>,<br>
-                                    <?= tgl_indo($row['tgl_mulai']) . " S/d " . tgl_indo($row['tgl_selesai']) ?>,<br>
-                                    <?= $row['lokasi'] ?>
-                                </td>
-                                <td align="center"><b><?= $row['status_diklat'] ?></b></td>
-
                             </tr>
                         <?php } ?>
                     </tbody>

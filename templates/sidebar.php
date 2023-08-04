@@ -52,21 +52,15 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="<?= base_url('admin/komisioner') ?>" class="nav-link">
+              <i class="fas fa-users nav-icon"></i>
+              <p>Data Komisioner</p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="<?= base_url('admin/pns') ?>" class="nav-link">
               <i class="fas fa-users nav-icon"></i>
               <p>Nominatif PNS</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?= base_url('admin/diklat') ?>" class="nav-link">
-              <i class="fas fa-info nav-icon"></i>
-              <p>Status Diklat PNS</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?= base_url('admin/rekappns') ?>" class="nav-link">
-              <i class="fas fa-file-alt nav-icon"></i>
-              <p>Rekap Nominatif PNS</p>
             </a>
           </li>
           <li class="nav-item">
@@ -76,9 +70,30 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="<?= base_url('admin/rekappns') ?>" class="nav-link">
+              <i class="fas fa-file-alt nav-icon"></i>
+              <p>Rekap Nominatif PNS</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="<?= base_url('admin/rekapppnpn') ?>" class="nav-link">
               <i class="fas fa-file-alt nav-icon"></i>
               <p>Rekap Nominatif PPNPN</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="<?= base_url('admin/kegiatan') ?>" class="nav-link">
+              <i class="fas fa-calendar-check nav-icon"></i>
+              <p>Kegiatan</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="<?= base_url('admin/diklat') ?>" class="nav-link">
+              <i class="fas fa-info nav-icon"></i>
+              <p> Diklat </p>
             </a>
           </li>
         </ul>
@@ -184,21 +199,13 @@
           </li>
 
           <li class="nav-item">
-            <a href="<?= base_url('pns/diklat') ?>" class="nav-link">
+            <a href="<?= base_url('pns/index') ?>" class="nav-link">
               <i class="nav-icon fas fa-reply"></i>
               <p>
-                Pengajuan Diklat
+                Kembali
               </p>
             </a>
           </li>
-          <!-- <li class="nav-item">
-            <a href="<?= base_url('pns/statusdiklat') ?>" class="nav-link">
-              <i class="nav-icon fas fa-info"></i>
-              <p>
-                Status Diklat
-              </p>
-            </a>
-          </li> -->
 
         </ul>
       </nav>

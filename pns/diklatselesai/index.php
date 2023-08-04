@@ -31,12 +31,12 @@ include '../../templates/head.php';
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Diklat</h1>
+                            <h1 class="m-0 text-dark">Diklat Selesai</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Beranda</a></li>
-                                <li class="breadcrumb-item active">Diklat</li>
+                                <li class="breadcrumb-item active">Diklat Selesai</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -55,16 +55,16 @@ include '../../templates/head.php';
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
-                                    <h3>Tahun : 2022</h3>
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-striped">
+                                        <table id="example1" class="table table-bordered table-striped">
                                             <thead class="bg-red">
                                                 <tr align="center">
                                                     <th>No</th>
                                                     <th>Nama Pegawai</th>
                                                     <th>Diklat</th>
+                                                    <th>Tujuan Diklat</th>
+                                                    <th>Akomodasi</th>
                                                     <th>Status Diklat</th>
-                                                    <th>Surat Tugas</th>
                                                 </tr>
                                             </thead>
                                             <tbody style="background-color: white">
@@ -74,7 +74,7 @@ include '../../templates/head.php';
                                                 LEFT JOIN user AS u ON d.id_user = u.id_user
                                                 LEFT JOIN nominatif_pegawai AS np ON u.id_user = np.id_user
                                                 LEFT JOIN kegiatan AS k ON d.id_kegiatan = k.id_kegiatan
-                                                WHERE d.id_user = '$_SESSION[id_user]' AND k.tahun = '2022'
+                                                WHERE d.id_user = '$_SESSION[id_user]' AND d.status_diklat = 'Selesai'
                                                 ");
                                                 while ($row = $data->fetch_array()) {
                                                 ?>
@@ -88,47 +88,9 @@ include '../../templates/head.php';
                                                             <?= tgl_indo($row['tgl_mulai']) . " S/d " . tgl_indo($row['tgl_selesai']) ?>,<br>
                                                             <?= $row['lokasi'] ?>
                                                         </td>
+                                                        <td><?= $row['deskripsi'] ?></td>
+                                                        <td><?= $row['akomodasi'] ?></td>
                                                         <td align="center"><b><?= $row['status_diklat'] ?></b></td>
-                                                        <td align="center"><a target="_blank" href="<?= base_url(); ?>/file/<?= $row['filest'] ?>" class="btn bg-dark btn-sm" title="Download"><i class="fa fa-download"></i> Download</i></a></td>
-                                                    </tr>
-                                                <?php } ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                </div>
-                                <div class="card-body">
-                                    <h3>Tahun : 2023</h3>
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-striped">
-                                            <thead class="bg-red">
-                                                <tr align="center">
-                                                    <th>No</th>
-                                                    <th>Nama Pegawai</th>
-                                                    <th>Diklat</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody style="background-color: white">
-                                                <?php
-                                                $no = 1;
-                                                $data = $koneksi->query("SELECT * FROM diklat AS d
-                                                LEFT JOIN user AS u ON d.id_user = u.id_user
-                                                LEFT JOIN nominatif_pegawai AS np ON u.id_user = np.id_user
-                                                LEFT JOIN kegiatan AS k ON d.id_kegiatan = k.id_kegiatan
-                                                WHERE d.id_user = '$_SESSION[id_user]' AND k.tahun = '2023'
-                                                ");
-                                                while ($row = $data->fetch_array()) {
-                                                ?>
-                                                    <tr>
-                                                        <td align="center"><?= $no++ ?></td>
-                                                        <td>
-                                                            <?= $row['nama_pegawai'] ?>
-                                                        </td>
-                                                        <td>
-                                                            <?= $row['nama_kegiatan'] ?>,<br>
-                                                            <?= tgl_indo($row['tgl_mulai']) . " S/d " . tgl_indo($row['tgl_selesai']) ?>,<br>
-                                                            <?= $row['lokasi'] ?>
-                                                        </td>
                                                     </tr>
                                                 <?php } ?>
                                             </tbody>

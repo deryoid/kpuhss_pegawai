@@ -73,7 +73,7 @@ include '../../templates/head.php';
                                                 <tr align="center">
                                                     <th>No</th>
                                                     <th>Nama Pegawai</th>
-                                                    <th>Jenis Diklat</th>
+                                                    <th>Diklat</th>
                                                     <th>Status Diklat</th>
                                                     <th>Surat Tugas</th>
                                                     <th></th>
@@ -85,19 +85,26 @@ include '../../templates/head.php';
                                                 $data = $koneksi->query("SELECT * FROM diklat AS d
                                                 LEFT JOIN user AS u ON d.id_user = u.id_user
                                                 LEFT JOIN nominatif_pegawai AS np ON u.id_user = np.id_user
+                                                LEFT JOIN kegiatan AS k ON d.id_kegiatan = k.id_kegiatan
                                                 ");
                                                 while ($row = $data->fetch_array()) {
                                                 ?>
                                                     <tr>
                                                         <td align="center"><?= $no++ ?></td>
-                                                        <td><?= $row['nama_pegawai'] ?></td>
-                                                        <td><?= $row['jenis_diklat'] ?></td>
+                                                        <td>
+                                                            <?= $row['nama_pegawai'] ?>
+                                                        </td>
+                                                        <td>
+                                                            <?= $row['nama_kegiatan'] ?>,<br>
+                                                            <?= tgl_indo($row['tgl_mulai']) . " S/d " . tgl_indo($row['tgl_selesai']) ?>,<br>
+                                                            <?= $row['lokasi'] ?>
+                                                        </td>
                                                         <td align="center"><b><?= $row['status_diklat'] ?></b></td>
                                                         <td align="center"><a target="_blank" href="<?= base_url(); ?>/file/<?= $row['filest'] ?>" class="btn bg-dark btn-sm" title="Download"><i class="fa fa-download"></i> Download</i></a></td>
 
                                                         <td align="center">
-                                                            <a href="edit?id=<?= $row['id_diklat'] ?>" class="btn btn-success btn-sm" title="Edit"><i class="fa fa-edit"></i> Surat Tugas</a>
-                                                            <a href="hapus?id=<?= $row['id_diklat'] ?>" class="btn btn-danger btn-sm alert-hapus" title="Hapus"><i class="fa fa-trash"></i> Batalkan</a>
+                                                            <a href="edit?id=<?= $row['id_diklat'] ?>" class="btn btn-success btn-sm" title="Hapus"><i class="fa fa-edit"></i> Status Diklat</a>
+                                                            <a href="hapus?id=<?= $row['id_diklat'] ?>" class="btn btn-danger btn-sm alert-hapus" title="Hapus"><i class="fa fa-trash"></i> Hapus Pegawai</a>
                                                         </td>
                                                     </tr>
                                                 <?php } ?>

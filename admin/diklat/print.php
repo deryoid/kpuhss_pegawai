@@ -43,7 +43,7 @@ $bln = array(
             <br>
             <br>
             <hr size="1px" color="black">
-            <font size="2">DATA NOMINATIF PNS
+            <font size="2">DATA DIKLAT
             </font>
         </b></p>
     <div class="row">
@@ -51,58 +51,35 @@ $bln = array(
             <div class="card-box table-responsive">
                 <table border="1" cellspacing="0" width="100%">
                     <thead class="bg-red">
-                        <tr align="center">
-                            <th>No</th>
-                            <th>Nama</th>
-                            <th>Tempat Lahir</th>
-                            <th>Tanggal Lahir</th>
-                            <th>NIP</th>
-                            <th>Pangkat Golongan</th>
-                            <th>TMT</th>
-                            <th>Jabatan Struktural</th>
-                            <th>TMT</th>
-                            <th>No SK Penempatan</th>
-                            <th>JK</th>
-                            <th>Agama</th>
-                            <th>Pendidikan Umum</th>
-                            <th>TMT</th>
-                            <th>Diklat Struktural</th>
-                            <th>Tanggal Keg. Struktural</th>
-                            <th>Diklat Fungsional</th>
-                            <th>Tanggal Keg. Fungsional</th>
-                            <th>Diklat Teknis</th>
-                            <th>Tanggal Keg. Teknis</th>
-                            <th>Keterangan</th>
-                        </tr>
-                    </thead>
+                        <thead class="bg-red">
+                            <tr align="center">
+                                <th>No</th>
+                                <th>Nama Pegawai</th>
+                                <th>Diklat</th>
+                                <th>Status Diklat</th>
+                            </tr>
+                        </thead>
                     <tbody style="background-color: white">
                         <?php
                         $no = 1;
-                        $data = $koneksi->query("SELECT * FROM nominatif_pegawai ORDER BY id_pegawai ASC");
+                        $data = $koneksi->query("SELECT * FROM diklat AS d
+                                                LEFT JOIN user AS u ON d.id_user = u.id_user
+                                                LEFT JOIN nominatif_pegawai AS np ON u.id_user = np.id_user
+                                                LEFT JOIN kegiatan AS k ON d.id_kegiatan = k.id_kegiatan
+                                                ");
                         while ($row = $data->fetch_array()) {
                         ?>
                             <tr>
                                 <td align="center"><?= $no++ ?></td>
-                                <td><?= $row['nama_pegawai'] ?></td>
-                                <td><?= $row['tempat_lahir'] ?></td>
-                                <td><?= $row['tanggal_lahir'] ?></td>
-                                <td><?= $row['nip'] ?></td>
-                                <td><?= $row['pangkat_gol'] ?></td>
-                                <td><?= $row['pangkat_tmt'] ?></td>
-                                <td><?= $row['jabatan_struktural'] ?></td>
-                                <td><?= $row['jabatan_tmt'] ?></td>
-                                <td><?= $row['no_sk_penempatan'] ?></td>
-                                <td><?= $row['jk'] ?></td>
-                                <td><?= $row['agama'] ?></td>
-                                <td><?= $row['pendidikan_umum'] ?></td>
-                                <td><?= $row['pendidikan_tmt'] ?></td>
-                                <td><?= $row['diklat_struktural'] ?></td>
-                                <td><?= $row['tgl_kegiatan_struktural'] ?></td>
-                                <td><?= $row['diklat_fungsional'] ?></td>
-                                <td><?= $row['tgl_kegiatan_fungsional'] ?></td>
-                                <td><?= $row['diklat_teknis'] ?></td>
-                                <td><?= $row['tgl_kegiatan_teknis'] ?></td>
-                                <td><?= $row['keterangan'] ?></td>
+                                <td>
+                                    <?= $row['nama_pegawai'] ?>
+                                </td>
+                                <td>
+                                    <?= $row['nama_kegiatan'] ?>,<br>
+                                    <?= tgl_indo($row['tgl_mulai']) . " S/d " . tgl_indo($row['tgl_selesai']) ?>,<br>
+                                    <?= $row['lokasi'] ?>
+                                </td>
+                                <td align="center"><b><?= $row['status_diklat'] ?></b></td>
                             </tr>
                         <?php } ?>
                     </tbody>

@@ -82,13 +82,6 @@ $row = $data->fetch_array();
                                                 </select>
                                             </div>
                                         </div>
-
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Upload Surat Tugas</label>
-                                            <div class="col-sm-10">
-                                                <input type="file" class="form-control" name="filest" value="<?= $row['filest'] ?>">
-                                            </div>
-                                        </div>
                                     </div>
                                     <!-- /.card-body -->
 
@@ -132,81 +125,19 @@ $row = $data->fetch_array();
 
 
 
-        if (!empty($_FILES['filest']['name'])) {
-            $filestlama = $row['filest'];
-            // UPLOAD file PEMOHON
-            $filest      = $_FILES['filest']['name'];
-            $x_filest    = explode('.', $filest);
-            $ext_filest  = end($x_filest);
-            $nama_filest = rand(1, 99999) . '.' . $ext_filest;
-            $size_filest = $_FILES['filest']['size'];
-            $tmp_filest  = $_FILES['filest']['tmp_name'];
-            $dir_filest  = '../../file/';
-            $allow_ext        = array('pdf');
-            $allow_size       = 2048 * 2048 * 3;
-            // var_dump($nama_file); die();
-
-            if (in_array($ext_filest, $allow_ext) === true) {
-                if ($size_filest <= $allow_size) {
-                    move_uploaded_file($tmp_filest, $dir_filest . $nama_filest);
-                    if (file_exists($dir_filest . $filestlama)) {
-                        unlink($dir_filest . $filestlama);
-                    }
-                    $e .= "Upload Success";
-                } else {
-                    echo "
-        <script type='text/javascript'>
-        setTimeout(function () {    
-            swal({
-                title: '',
-                text:  'Ukuran File Terlalu Besar, Maksimal 3 Mb',
-                type: 'warning',
-                timer: 3000,
-                showConfirmButton: true
-            });     
-        },10);  
-        window.setTimeout(function(){ 
-            window.history.back();
-        } ,2000);   
-        </script>";
-                }
-            } else {
-                echo "
-    <script type='text/javascript'>
-    setTimeout(function () {    
-        swal({
-            title: 'Format File Tidak Didukung',
-            text:  'Format File Harus Berupa PDF',
-            type: 'warning',
-            timer: 3000,
-            showConfirmButton: true
-        });     
-    },10);  
-    window.setTimeout(function(){ 
-        window.history.back();
-    } ,2000);   
-    </script>";
-            }
-        } else {
-            $nama_filest = $row['filest'];
-            $e .= "Upload Success!";
-        }
-        if (!empty($e)) {
-
-            $submit = $koneksi->query("UPDATE diklat SET 
-        status_diklat = '$status_diklat',
-        filest = '$nama_filest'
+        $submit = $koneksi->query("UPDATE diklat SET 
+        status_diklat = '$status_diklat'
         WHERE 
         id_diklat = '$id'
         ");
 
 
-            if ($submit) {
-                $_SESSION['pesan'] = "Data Berhasil Diubah";
-                echo "<script>window.location.replace('../diklat/');</script>";
-            }
+        if ($submit) {
+            $_SESSION['pesan'] = "Data Berhasil Diubah";
+            echo "<script>window.location.replace('../diklat/');</script>";
         }
     }
+
     ?>
 </body>
 

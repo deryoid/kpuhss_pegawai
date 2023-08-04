@@ -33,7 +33,8 @@ require 'config/config.php';
         <div class="card">
             <div class="login-logo">
                 <br>
-                <h6 style="color:black; font-family: system-ui;"><b>APLIKASI PENDATAAN PEGAWAI NOMINATIF</b><br></h6>
+                <h6 style="color:black; font-family: system-ui;"><b>APLIKASI JADWAL KEGIATAN DAN LAPORAN</b><br></h6>
+                <h6 style="color:black; font-family: system-ui;"><b>DIKLAT PEGAWAI</b><br></h6>
                 <h3 style="color:black; font-family: system-ui;"><b>KOMISI PEMILIHAN UMUM</b><br>
                     Kabupaten HSS
                 </h3>
