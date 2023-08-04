@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Waktu pembuatan: 16 Jul 2023 pada 09.25
+-- Waktu pembuatan: 04 Agu 2023 pada 03.18
 -- Versi server: 5.7.34
 -- Versi PHP: 7.4.21
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `diklat` (
   `id_diklat` int(11) NOT NULL,
-  `jenis_diklat` varchar(20) NOT NULL,
+  `id_kegiatan` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `status_diklat` varchar(50) NOT NULL,
   `filest` varchar(255) DEFAULT NULL
@@ -39,8 +39,58 @@ CREATE TABLE `diklat` (
 -- Dumping data untuk tabel `diklat`
 --
 
-INSERT INTO `diklat` (`id_diklat`, `jenis_diklat`, `id_user`, `status_diklat`, `filest`) VALUES
-(1, 'Diklat Fungsional', 11, 'Pengajuan', '67465.pdf');
+INSERT INTO `diklat` (`id_diklat`, `id_kegiatan`, `id_user`, `status_diklat`, `filest`) VALUES
+(3, 3, 12, 'Selesai', '45402.pdf');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `kegiatan`
+--
+
+CREATE TABLE `kegiatan` (
+  `id_kegiatan` int(11) NOT NULL,
+  `nama_kegiatan` varchar(150) NOT NULL,
+  `tahun` varchar(50) NOT NULL,
+  `tgl_mulai` date NOT NULL,
+  `tgl_selesai` date NOT NULL,
+  `luar_dalam` varchar(70) NOT NULL,
+  `lokasi` varchar(255) NOT NULL,
+  `deskripsi` text NOT NULL,
+  `akomodasi` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data untuk tabel `kegiatan`
+--
+
+INSERT INTO `kegiatan` (`id_kegiatan`, `nama_kegiatan`, `tahun`, `tgl_mulai`, `tgl_selesai`, `luar_dalam`, `lokasi`, `deskripsi`, `akomodasi`) VALUES
+(3, 'Diklat Struktural', '2023', '2023-08-04', '2023-08-07', 'Luar Kota', 'Gedung Balai Pelatihan Pegawai Provinsi Kalsel', 'Kegiatan pelatihan untuk pejabat Struktural di lingkungan daerah Hulu Sungai Selatan', 'Hotel, Makan Siang dan Transfortasi selama kegiatan');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `nominatif_komisioner`
+--
+
+CREATE TABLE `nominatif_komisioner` (
+  `id_komisioner` int(11) NOT NULL,
+  `nama_komisioner` varchar(50) DEFAULT NULL,
+  `tempat_lahir` varchar(40) DEFAULT NULL,
+  `tanggal_lahir` date DEFAULT NULL,
+  `no_sk_penempatan` varchar(50) DEFAULT NULL,
+  `jk` varchar(50) DEFAULT NULL,
+  `agama` varchar(50) DEFAULT NULL,
+  `keterangan` text,
+  `filepenempatan` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data untuk tabel `nominatif_komisioner`
+--
+
+INSERT INTO `nominatif_komisioner` (`id_komisioner`, `nama_komisioner`, `tempat_lahir`, `tanggal_lahir`, `no_sk_penempatan`, `jk`, `agama`, `keterangan`, `filepenempatan`) VALUES
+(14, 'Syamsul Azis, S.Sos., MM', 'Kandangan', '1988-09-22', '24/KPU/KMS/2023', 'Laki-laki', 'Islam', 'Komisaris Dewan', '62900.pdf');
 
 -- --------------------------------------------------------
 
@@ -77,7 +127,7 @@ CREATE TABLE `nominatif_pegawai` (
 
 INSERT INTO `nominatif_pegawai` (`id_pegawai`, `nama_pegawai`, `tempat_lahir`, `tanggal_lahir`, `nip`, `pangkat_gol`, `pangkat_tmt`, `jabatan_struktural`, `jabatan_tmt`, `no_sk_penempatan`, `jk`, `agama`, `pendidikan_umum`, `pendidikan_tmt`, `keterangan`, `filepangkat`, `filejabatan`, `filepenempatan`, `filependidikan`, `id_user`) VALUES
 (2, 'H.GUSTI ACHMAD RIDUAN,S.Sos', 'Banjarmasin', '1965-06-27', '196506271986031011', 'Pembina Tk.I,IV/b', '2020-01-10', 'Sekretaris', '2020-09-15', '-', 'Laki-laki', 'Islam', 'S1', '1999-01-01', 'Organik', '', '', '', '', 0),
-(3, 'WAWAN SETIAWAN,SH', 'Kandangan', '1986-06-01', '198606012010121004', 'Penata, IIIc', '2018-04-01', 'Kepala Sub Bagian Keungan,Umum dan Logistik', '2022-03-11', '-', 'Laki-laki', 'Islam', 'S1', '2010-04-01', 'Organik', '', '', '', '', 0),
+(3, 'WAWAN SETIAWAN,SH', 'Kandangan', '1986-06-01', '198606012010121004', 'Penata, IIIc', '2018-04-01', 'Kepala Sub Bagian Keungan,Umum dan Logistik', '2022-03-11', '-', 'Laki-laki', 'Islam', 'S1', '2010-04-01', 'Organik', '', '', '', '', 12),
 (4, 'FARAH AGUSTINA SETIAWATI,SH', 'Ujung Pandang', '1984-09-28', '198408282010122003', 'Penata, IIIc', '2019-01-04', 'Kepala Sub. Bagian Hukum dan Sumber Daya Manusia', '2022-11-03', '-', 'Perempuan', 'Islam', 'S1', '2019-01-04', 'Organik', '', '', '', '', 0),
 (5, 'SUCI LESTARI,S.Ikom', 'Hulu Sungai Tengah', '1985-08-01', '198501082010122006', 'Penata, IIIc', '2019-01-04', 'Penyusun Bahan Informasi dan Publikasi', '2020-03-08', '-', 'Perempuan', 'Islam', 'S1', '2009-01-04', 'Organik', '', '', '', '', 0),
 (6, 'RUSMA ARIATI,SE', 'Karang Jawa', '1984-06-21', '198406212011012013', 'Penata,IIIc', '2019-01-04', 'Penyusun Program Anggaran dan Pelaporan', '2020-01-20', '-', 'Perempuan', 'Islam', 'S1', '2006-01-04', 'Organik', '', '', '', '', 0),
@@ -86,7 +136,6 @@ INSERT INTO `nominatif_pegawai` (`id_pegawai`, `nama_pegawai`, `tempat_lahir`, `
 (9, 'ZAINAL HILMI YUSTAN', 'Kandangan', '1982-10-25', '198210252007011003', 'Pengatur Tk.I,IId', '2019-05-01', 'Pengelola Data', '2020-08-03', '-', 'Laki-laki', 'Islam', 'SMA', '2001-04-01', 'Organik', '', '', '', '', 0),
 (10, 'NAJMI HIDAYATI', 'Kandangan', '1985-06-08', '198506082007012003', 'Pengatur Tk.I,IId', '2019-04-01', 'Verifikator Keuangan', '2016-01-14', '-', 'Perempuan', 'Islam', 'SMA', '2003-05-01', 'Organik', '', '', '', '', 0),
 (11, 'JAINAL ABIDIN', 'Kandangan', '1982-07-12', '198207122009101001', 'Pengatur,IIc', '2018-04-01', 'Pengadministrasi Umum', '2020-08-03', '-', 'Laki-laki', 'Islam', 'SMA', '2001-02-01', 'Organik', '', '', '', '', 0),
-(12, '1234', '1234', '2023-02-27', '1234', '1234', '2023-01-29', '1234', '2023-02-20', '1234', 'Laki-laki', 'Islam', 'SMA', '2023-02-20', '1231234', '21413.pdf', '98635.pdf', '37689.pdf', '57496.pdf', 0),
 (13, 'Maria Ulfah', 'Kandangan', '2023-07-16', '123456', 'II B', '2023-07-16', '123', '2023-07-16', '123', 'Perempuan', 'Islam', 'S2', '2023-07-16', '123', '', '', '', '', 11);
 
 -- --------------------------------------------------------
@@ -228,7 +277,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id_user`, `nama_user`, `username`, `password`, `role`) VALUES
 (1, 'Maulida', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Administrator'),
-(11, 'Maria Ulfah', 'maria', '827ccb0eea8a706c4c34a16891f84e7b', 'PNS');
+(11, 'Maria Ulfah', 'maria', '827ccb0eea8a706c4c34a16891f84e7b', 'PNS'),
+(12, 'WAWAN SETIAWAN,SH', 'wawan', '827ccb0eea8a706c4c34a16891f84e7b', 'PNS');
 
 --
 -- Indexes for dumped tables
@@ -239,7 +289,20 @@ INSERT INTO `user` (`id_user`, `nama_user`, `username`, `password`, `role`) VALU
 --
 ALTER TABLE `diklat`
   ADD PRIMARY KEY (`id_diklat`),
-  ADD KEY `id_user` (`id_user`);
+  ADD KEY `id_user` (`id_user`),
+  ADD KEY `id_kegiatan` (`id_kegiatan`);
+
+--
+-- Indeks untuk tabel `kegiatan`
+--
+ALTER TABLE `kegiatan`
+  ADD PRIMARY KEY (`id_kegiatan`);
+
+--
+-- Indeks untuk tabel `nominatif_komisioner`
+--
+ALTER TABLE `nominatif_komisioner`
+  ADD PRIMARY KEY (`id_komisioner`);
 
 --
 -- Indeks untuk tabel `nominatif_pegawai`
@@ -280,7 +343,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `diklat`
 --
 ALTER TABLE `diklat`
-  MODIFY `id_diklat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_diklat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT untuk tabel `kegiatan`
+--
+ALTER TABLE `kegiatan`
+  MODIFY `id_kegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT untuk tabel `nominatif_komisioner`
+--
+ALTER TABLE `nominatif_komisioner`
+  MODIFY `id_komisioner` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT untuk tabel `nominatif_pegawai`
@@ -310,7 +385,7 @@ ALTER TABLE `rekap_ppnpn`
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

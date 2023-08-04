@@ -89,7 +89,7 @@ include '../../templates/head.php';
                                                         <td><?= $row['deskripsi'] ?></td>
                                                         <td><?= $row['akomodasi'] ?></td>
                                                         <td align="center"><b><?= $row['status_diklat'] ?></b></td>
-                                                        <td align="center"><a class="btn btn-lg bg-blue" href="print?id=<?= $row['id_diklat']; ?>"><i class="fa fa-address-card"></i></a></td>
+                                                        <td align="center"><a target="blank" class="btn btn-lg bg-blue" href="print?id=<?= $row['id_diklat']; ?>"><i class="fa fa-address-card"></i></a></td>
                                                     </tr>
                                                 <?php } ?>
                                             </tbody>
