@@ -101,7 +101,6 @@ include '../../templates/head.php';
                                                 ?>
                                                     <tr>
                                                         <td align="center">
-                                                            <a href="edit?id=<?= $row['id_pegawai'] ?>" class="btn btn-success btn-sm" title="Edit"><i class="fa fa-edit"></i> Edit</a>
                                                             <a href="hapus?id=<?= $row['id_pegawai'] ?>" class="btn btn-danger btn-sm alert-hapus" title="Hapus"><i class="fa fa-trash"></i> Hapus</a>
                                                         </td>
                                                         <td align="center"><?= $no++ ?></td>

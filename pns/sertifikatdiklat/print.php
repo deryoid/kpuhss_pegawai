@@ -26,65 +26,87 @@ LEFT JOIN kegiatan AS k ON d.id_kegiatan = k.id_kegiatan
 WHERE d.id_user = '$_SESSION[id_user]' AND d.status_diklat = 'Selesai' AND d.id_diklat = '$id'
 ")->fetch_array();
 ?>
-
 <script type="text/javascript">
     window.print();
 </script>
-
-<!DOCTYPE html>
 <html>
 
 <head>
-    <title>Sertifikat Peserta <?= $data['nama_kegiatan'] ?></title>
+    <style type='text/css'>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+        }
 
+        body {
+            color: black;
+            display: table;
+            font-family: Georgia, serif;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .container {
+            border: 20px solid tan;
+            width: 750px;
+            height: 563px;
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .logo {
+            color: tan;
+        }
+
+        .marquee {
+            color: tan;
+            font-size: 48px;
+            margin: 20px;
+        }
+
+        .assignment {
+            margin: 20px;
+        }
+
+        .person {
+            border-bottom: 2px solid black;
+            font-size: 32px;
+            font-style: italic;
+            margin: 20px auto;
+            width: 400px;
+        }
+
+        .reason {
+            margin: 20px;
+        }
+    </style>
 </head>
 
-<body><br><br><br><br>
-    <fieldset>
-        <hr size="2px" color="black">
-        <hr size="2px" color="black">
-        <h1>
-            <center>
-                Sertifikat Peserta <?= $data['nama_kegiatan'] ?>
-            </center>
-        </h1>
-        <hr size="2px" color="black">
-        <hr size="2px" color="black">
-        <br>
-
-        <br>
-        <div class="card-body" align="center">
-            <h2>
-                <dl class="row">
-
-                    <u>
-                        <dt class="col-sm-4">NAMA <?php echo ": " . $data['nama_pegawai']; ?></dt>
-                        <dt class="col-sm-4">NIP<?php echo ": " . $data['nip']; ?></dt>
-                    </u>
-
-                </dl>
-            </h2>
-        </div>
-        <div class="card-body" align="justify">
-            <h3>
-                <p>Kepada Peserta Kegiatan <?= $data['nama_kegiatan'] ?>, Kami mengucapkan banyak terimakasih kepada peserta yang telah mengikuti kegiatan dari <?= tgl_indo($data['tgl_mulai']) ?> sampai dengan <?= tgl_indo($data['tgl_selesai']) ?>, yang bertujuan untuk <?= $data['deskripsi'] ?> dan berharap ilmu yang didapat akan sangat berguna kedepannya</p>
-            </h3>
+<body>
+    <div class="container">
+        <div class="logo">
+            <title>Sertifikat Peserta <?= $data['nama_kegiatan'] ?></title>
         </div>
 
-
-
-        <br>
-        <div style="text-align: center; display: inline-block; float: right;">
-            <h5>
-                KAndangan, <?php echo tgl_indo(date('Y-m-d')); ?><br>
-                <br><br><br><br>
-                <u>Ketua Pelaksana<br>
-            </h5>
+        <div class="marquee">
+            Sertifikat Peserta <?= $data['nama_kegiatan'] ?>
         </div>
 
+        <div class="assignment">
+            Diberikan Kepada :
+        </div>
 
+        <div class="person">
+            <?php echo $data['nama_pegawai']; ?><br>
+            <i style="font-size: 30px;"><?php echo $data['nip']; ?></i>
+        </div>
+
+        <div class="reason" align="justify">
+            <p style="font-size: 16px;">Kepada Peserta Kegiatan <?= $data['nama_kegiatan'] ?>, Kami mengucapkan banyak terimakasih kepada peserta yang telah mengikuti kegiatan dari <?= tgl_indo($data['tgl_mulai']) ?> sampai dengan <?= tgl_indo($data['tgl_selesai']) ?>, yang bertujuan untuk <?= $data['deskripsi'] ?> dan berharap ilmu yang didapat akan sangat berguna kedepannya</p>
+        </div>
+    </div>
 </body>
-</fieldset>
 
 </html>
 

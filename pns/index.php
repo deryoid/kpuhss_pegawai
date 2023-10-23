@@ -1,8 +1,10 @@
 <?php
 require '../config/config.php';
+require '../config/koneksi.php';
 ?>
 <!DOCTYPE html>
 <html>
+
 <?php
 include '../templates/head.php';
 ?>
@@ -122,6 +124,17 @@ include '../templates/head.php';
           <!-- /.row -->
 
         </div><!-- /.container-fluid -->
+        <hr>
+        <div class="container-fluid">
+          <h5 align="center">Kalender Jadwal Kegiatan</h5>
+          <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+              <div id="calendar"></div>
+            </div>
+            <div class="col-md-2"></div>
+          </div>
+        </div>
       </section>
       <!-- /.content -->
 
@@ -142,6 +155,39 @@ include '../templates/head.php';
   <?php
   include '../templates/script.php';
   ?>
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.js'></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('calendar');
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        events: [
+          <?php
+
+          $data = mysqli_query($koneksi, "SELECT * FROM diklat AS d
+                                  LEFT JOIN user AS u ON d.id_user = u.id_user
+                                  LEFT JOIN nominatif_pegawai AS np ON u.id_user = np.id_user
+                                  LEFT JOIN kegiatan AS k ON d.id_kegiatan = k.id_kegiatan
+                                  WHERE d.id_user = '$_SESSION[id_user]' AND k.tahun = '2023'");
+          //melakukan looping
+          while ($d = mysqli_fetch_array($data)) {
+          ?> {
+              title: '<?php echo $d['nama_kegiatan']; ?>',
+              start: '<?php echo $d['tgl_mulai']; ?>',
+              end: '<?php echo $d['tgl_selesai']; ?>'
+            },
+          <?php } ?>
+        ],
+        selectOverlap: function(event) {
+          return event.rendering === 'background';
+        }
+      });
+
+      calendar.render();
+    });
+  </script>
 </body>
 
 </html>
